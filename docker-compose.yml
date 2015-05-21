@@ -1,0 +1,56 @@
+virtuosodata:
+  image: busybox
+  volumes:
+    - /virtuoso
+
+virtuoso:
+  image: stain/virtuoso
+  ports:
+    - "8890"
+  volumes_from:
+    - virtuosodata
+    # TODO: /staging
+  restart: always
+  
+mysqldata:
+  image: busybox
+  volumes:
+    - /var/lib/mysql
+
+mysql:    
+  image: mysql
+  volumes_from:
+    - mysqldata
+  environment:
+    - MYSQL_ROOT_PASSWORD=uCie0ahgah
+    - MYSQL_DATABASE=ims
+    - MYSQL_USER=ims
+    - MYSQL_PASSWORD=ims
+  # TODO: Data loading
+  restart: always
+
+identity:
+  image: openphacts/identitymappingservice
+  links:
+    - mysql:mysql
+  restart: always
+
+api:
+  image: openphacts/ops-linkeddataapi
+  links:
+    - identity:ims
+    - virtuoso:sparql
+  restart: always
+## TODO: Regular php5 and memcached image?
+    
+explorer2:
+  image: openphacts/explorer2
+  restart: always
+  ## TODO: Link to PHP
+
+
+#elasticsearch:
+#  image: elasticsearch
+##  TODO: Data loading
+#ops-search:
+# image: openphacts/ops-search
