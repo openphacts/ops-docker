@@ -1,6 +1,6 @@
 
 virtuosodata:
-  build: virtuoso-data
+  build: virtuosodata
   command: true #no-op
       
 virtuoso:
