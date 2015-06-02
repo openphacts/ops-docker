@@ -1,8 +1,8 @@
-virtuosodata:
-  image: busybox
-  volumes:
-    - /virtuoso
 
+virtuosodata:
+  build: virtuoso-data
+  command: true #no-op
+      
 virtuoso:
   image: stain/virtuoso
   ports:

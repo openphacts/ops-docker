@@ -9,7 +9,5 @@ VOLUME /download
 WORKDIR /download
 
 # Load using staging.sql from stain/virtuoso
-RUN /tmp/download.sh && cp /tmp/staging.sql /staging/ && /usr/local/bin/start-virtuoso.sh
-
-
+RUN /tmp/download.sh && cp /tmp/staging.sql /staging/ && /usr/local/bin/staging.sh
 
