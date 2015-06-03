@@ -4,11 +4,12 @@ BASE=http://data.openphacts.org/1.5/rdf/
 
 rm -f *.sha1
 # Get *.sha1 first
-wget --no-verbose --recursive --no-directories -A "GO.tar*sha1" --no-parent $BASE
+echo "Downloading checksums from $BASE"
+wget --no-verbose --recursive --no-directories -A "*.tar*sha1" --no-parent $BASE
 
 urls=""
 for sha in *.sha1; do
-  file=$(echo $sha | sed s/.sha1$//) 
+  file=`echo $sha | sed s/.sha1$//`
   if ! [ -f $file ] || ! sha1sum --status -c $sha 2>/dev/null ; then 
     rm -f $file
     url="${BASE}${file}"
@@ -16,14 +17,18 @@ for sha in *.sha1; do
   fi
 done
 
+echo "Downloading RDF datasets to /download"
+
 if [ "$urls" != "" ] ; then
-  wget --no-verbose -A "GO.tar*" $urls
+  wget --no-verbose -A "*.tar*" $urls
 fi
 
+echo "Verifying checksums"
 sha1sum -c *.sha1
 
+echo "Extracting to /staging"
 mkdir -p /staging
 for x in /download/*tar.xz ; do 
   tar xfv $x 
 done
-
+echo "Data download complete"
