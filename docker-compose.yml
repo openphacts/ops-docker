@@ -56,9 +56,11 @@ explorer2:
   image: openphacts/explorer2
   ports:
     - "3000:3000"
-  restart: always
   links:
     - api
+  environment:
+    - API_URL http://api/
+  restart: always
 
 
 #elasticsearch:
