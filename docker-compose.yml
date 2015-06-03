@@ -26,15 +26,20 @@ mysql:
     - MYSQL_DATABASE=ims
     - MYSQL_USER=ims
     - MYSQL_PASSWORD=ims
-  # TODO: Data loading
   restart: always
+
+mysqlstaging:
+  build: mysqldata
+  links:
+    - mysql
 
 ims:
   image: openphacts/identitymappingservice
   ports:
     - "8082:8080"
   links:
-    - mysql:mysql
+    - mysql
+    - mysqlstaging
   restart: always
 
 api:
@@ -52,7 +57,8 @@ explorer2:
   ports:
     - "3000:3000"
   restart: always
-  ## TODO: Link to PHP
+  links:
+    - api
 
 
 #elasticsearch:
