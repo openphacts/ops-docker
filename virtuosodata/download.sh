@@ -28,6 +28,7 @@ sha1sum -c *.sha1
 
 echo "Extracting to /staging"
 mkdir -p /staging
+cd /staging
 for x in /download/*tar.xz ; do 
   tar xfv $x 
 done
