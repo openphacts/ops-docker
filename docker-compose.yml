@@ -42,15 +42,18 @@ ims:
     - mysqlstaging
   restart: always
 
+memcached:
+  image: memcached
+    
 api:
   image: openphacts/ops-linkeddataapi
   ports:
     - "8081:80"
   links:
     - ims
+    - memcached
     - virtuoso:sparql
   restart: always
-## TODO: Regular php5 and memcached image?
     
 explorer2:
   image: openphacts/explorer2
