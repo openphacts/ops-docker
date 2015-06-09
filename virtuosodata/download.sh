@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-BASE=http://data.openphacts.org/1.5/rdf/
+BASE=http://data.openphacts.org/dev/1.5/rdf/
 
 rm -f *.sha1
 # Get *.sha1 first
@@ -29,7 +29,7 @@ sha1sum -c *.sha1
 echo "Extracting to /staging"
 mkdir -p /staging
 cd /staging
-for x in /download/*tar.xz ; do 
+for x in /download/*tar ; do 
   tar xfv $x 
 done
 echo "Data download complete"
