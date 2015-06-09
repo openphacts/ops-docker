@@ -1,16 +1,15 @@
 
 virtuosodata:
   build: virtuosodata
-  command: true #no-op
       
 virtuoso:
   image: stain/virtuoso
   ports:
-    - "8890:8890"
+    - "8895:8890"
   volumes_from:
     - virtuosodata
     # TODO: /staging
-  restart: always
+  #restart: always
   
 mysqldata:
   image: busybox
@@ -26,7 +25,7 @@ mysql:
     - MYSQL_DATABASE=ims
     - MYSQL_USER=ims
     - MYSQL_PASSWORD=ims
-  restart: always
+  #restart: always
 
 mysqlstaging:
   build: mysqlstaging
@@ -36,11 +35,11 @@ mysqlstaging:
 ims:
   image: openphacts/identitymappingservice
   ports:
-    - "8082:8080"
+    - "8182:8080"
   links:
     - mysql
     - mysqlstaging
-  restart: always
+  #restart: always
 
 memcached:
   image: memcached
@@ -48,12 +47,12 @@ memcached:
 api:
   image: openphacts/ops-linkeddataapi
   ports:
-    - "8081:80"
+    - "8181:80"
   links:
     - ims
     - memcached
     - virtuoso:sparql
-  restart: always
+  #restart: always
     
 explorer2:
   image: openphacts/explorer2
@@ -63,7 +62,7 @@ explorer2:
     - api
   environment:
     - API_URL http://api/
-  restart: always
+  #restart: always
 
 
 #elasticsearch:
