@@ -1,6 +1,7 @@
 
 virtuosodata:
-  build: virtuosodata
+  #  build: virtuosodata-fromrdf
+  build: virtuosodata-frombackup
       
 virtuoso:
   image: stain/virtuoso
