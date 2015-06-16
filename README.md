@@ -150,9 +150,23 @@ sparql and api.
 Assuming the previous loading has completed, you can now start
 the rest of the Open PHACTS platform:
 
-    sudo docker-compose up
+    sudo docker-compose up -d
 
-This should expose the following services (replace `localhost` with your
+You can follow the progress by looking at the logs (press Ctrl-C to stop watching):
+
+    sudo docker-compose logs
+
+The Open PHACTS platform should be started when you see the equivalent of these
+from each container:
+
+api_1 | [Tue Jun 16 16:49:14.309976 2015] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.10 (Debian) PHP/5.6.10 configured -- resuming normal operations
+mysql_1           | 2015-06-16 16:48:47 1 [Note] mysqld: ready for connections.
+explorer2_1 | [2015-06-16 16:49:35] INFO  WEBrick::HTTPServer#start: pid=1 port=3000
+ims_1 | 16-Jun-2015 16:49:06.641 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5568 ms
+
+The `virtuoso` container usually takes the longest to start up.
+
+Once started, this should expose the following services (replace `localhost` with your
 server's hostname):
 
   * [http://localhost:3001/](http://localhost:3001/) - Open PHACTS Explorer Web UI  
