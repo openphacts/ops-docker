@@ -8,7 +8,7 @@ virtuosostaging:
   #  build: virtuosodata-fromrdf
   build: virtuosodata-frombackup
   volumes_from:
-    -virtuosodata
+    - virtuosodata
 
 virtuoso:
   image: stain/virtuoso
