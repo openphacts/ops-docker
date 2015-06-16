@@ -97,7 +97,10 @@ Next we'll build the two local data docker containers
 the [Open PHACTS 1.5 data](http://data.openphacts.org/1.5/) - this
 is about ~20 GB and might take some time to download and stage.
 
-    docker-compose up mysqlstaging virtuosodata
+    sudo docker-compose up -d mysqlstaging
+    sudo docker-compose run virtuosostaging
+    sudo docker-compose logs   # check progress on mysqlstaging
+
 
 ## Running Open PHACTS Docker images
 
