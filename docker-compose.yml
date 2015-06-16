@@ -2,23 +2,35 @@
 # Docker Compose configuration
 # https://docs.docker.com/compose/yml/
 #
-# Each entry below defines a docker container, 
+# Each entry below defines a docker container,
 # some of which expose ports, e.g. this exposes
 # the internal port 80 as port 3002 to the world:
 #
 # ports:
 #   - "3002:80"
-# 
+#
 # To change the exposed port, change the number on the left
 #
 # Data is stored in Docker "olumes, which by default would be
 # managed by Docker, e.g. created within /var/lib/docker
 # with a UUID.
-# 
+#
 # To use a different folder/partition, e.g. for backup purposes,
-# speed or disk requirements, modify "volumes:" for the 
+# speed or disk requirements, modify "volumes:" for the
 # *data containers further down.
-# 
+#
+
+
+explorer2:
+  image: openphacts/explorer2
+  ports:
+    - "3001:3000"
+  links:
+    - api
+  environment:
+    # CHANGE: "localhost" to fully qualified hostname
+    - API_URL=http://localhost:3002/
+  #restart: always
 
 api:
   image: openphacts/ops-linkeddataapi
@@ -31,17 +43,7 @@ api:
     - virtuoso:sparql
   #restart: always
 
-explorer2:
-  image: openphacts/explorer2
-  ports:
-    - "3001:3000"
-  links:
-    - api
-  environment:
-    # CHANGE: "localhost" to fully qualified hostname
-    - API_URL=http://localhost:3002/
-  #restart: always
-  
+# SPARQL server
 virtuoso:
   image: stain/virtuoso
   ports:
