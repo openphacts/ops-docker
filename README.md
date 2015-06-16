@@ -1,19 +1,19 @@
 # Open PHACTS Docker images
 
 The [Open PHACTS Discovery Platform](http://www.openphacts.org/) can be
-installed as a combination of [Docker](http://docker.com/) images.
+installed as a series of [Docker](http://docker.com/) containers.
 
-These images will also download and use
+These containers will also download and use
 the latest Open PHACTS data release, and will provide the
 Virtuoso SPARQL endpoint, the Open PHACTS REST API and the
 Explorer web interface.
 
 **External services**: The following components of the Open PHACTS platform
-is not yet included in this release, and can instead be configured to
-invoke public APIs:
+is not yet included in this release, and invoke public APIs:
 
-- Chemical structure search (calls http://ops.rsc.org/)
-- Text to Concept search (calls to http://conceptwiki.org/)
+- Chemical structure search APIs (e.g. SMILEStoCSID and Similarity search) calls http://ops.rsc.org/
+- Text to Concept search calls http://conceptwiki.openlinksw.com/
+
 
 ## Requirements
 
@@ -23,9 +23,9 @@ Minimal hardware requirements:
   - ~ 4 CPU core
 
 Recommended hardware:
-  - ~ 250 GB of SSD
-  - ~ 100 GB of RAM
-  - ~ 16 cores
+  - ~ 250 GB of SSD disk
+  - ~ 128 GB of RAM
+  - > 8 CPU cores
 
 Prerequisites:
 
@@ -116,6 +116,34 @@ Once `virtuosostaging` completes, check the progress on `mysqlstaging`:
     sudo docker-compose logs mysqlstaging
 
 Press **Ctrl-C** to stop following the logs.
+
+## Configuring Open PHACTS platform
+
+Edit the `docker-compose.yml` file for your host-specific settings.
+This is a [Docker Compose configuration file](https://docs.docker.com/compose/yml/).
+
+You may want to change the exposed ports from `300*` to different ports,
+or avoid their exposure at all. The only requirement here is that the exposed
+port for `api` must correspond to the port in `API_URL`, and that the ports
+are not already in use on the host server.
+
+Unless you are going to access the platform on `localhost` exclusively,
+you **must**  change the `API_URL` variable for the
+`explorer2` container. This URL must use the fully qualified hostname
+as it will be accessed in the browser. The port should remain
+as `3002` unless you have changed the export port for `api`.
+
+For example:
+
+```yaml
+    environment:
+      - API_URL=http://server13.example.com:3002/
+```
+
+
+**TODO**: Make a wrapping webserver that provides a common port 80 for api,
+sparql and api.
+
 
 ## Running Open PHACTS platform
 
