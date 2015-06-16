@@ -21,9 +21,17 @@ done
 
 echo "Downloading Virtuoso backup set to /download"
 
-if [ "$urls" != "" ] ; then
-  wget -A "*.tar*" $urls
-fi
+# axel gives ~4 times (2MB/s -> 10 MB/s) faster downloads 
+# using 6 connections and http range requests
+# 
+# In a rush? Try --num-connection=40 and
+# you might get 50 MB/s
+for url in $urls ; do
+  axel --alternate --num-connections=6 $url
+done
+#if [ "$urls" != "" ] ; then
+#  wget -A "*.tar*" $urls
+#fi
 
 echo "Verifying checksums"
 sha1sum -c *.sha1
