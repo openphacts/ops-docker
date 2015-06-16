@@ -12,7 +12,7 @@ wget -e robots=off --no-verbose --recursive --no-directories -A "*.tar*sha1" --n
 urls=""
 for sha in *.sha1; do
   file=`echo $sha | sed s/.sha1$//`
-  if ! [ -f $file ] || ! sha1sum --status -c $sha 2>/dev/null ; then 
+  if ! [ -f $file ] || ! sha1sum --status -c $sha 2>/dev/null ; then
     rm -f $file
     url="${BASE}${file}"
     urls="$urls $url"
@@ -31,8 +31,8 @@ sha1sum -c *.sha1
 echo "Extracting to /virtuoso"
 mkdir /virtuoso/1
 cd /virtuoso/1
-for x in /download/*tar ; do 
-  tar xfv $x 
+for x in /download/*tar ; do
+  tar xfv $x
   mv */*.bp ..
 done
 cd /virtuoso
