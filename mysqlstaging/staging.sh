@@ -5,7 +5,7 @@ rm -f $sql
 
 cd /staging
 for file in *.sql.gz ; do
-  db=$(echo $file | sed 's/\\.gz$//' | sed 's/\\.sql//')
+  db=`echo $file | sed 's/\\.gz$//' | sed 's/\\.sql//'`
   staged=.$db.staged
   if ! [ -f $staged ] ; then
     echo "CREATE DATABASE IF NOT EXISTS $db;" >> $sql
