@@ -76,9 +76,9 @@ Download this `ops-platform-setup` repository for the `docker` branch:
     curl -L https://github.com/openphacts/ops-platform-setup/archive/docker.tar.gz | tar xzv
     cd ops-platform-setup-docker/docker
 
-To start:
+To start, make sure you are in the `ops-platform-setup-docker/docker`
+folder and run:
 
-    cd ops-platform-setup
     sudo docker-compose pull
 
 This will download the latest version of these
@@ -104,7 +104,8 @@ data containers and their data staging counterpaths,
 the [Open PHACTS 1.5 data](http://data.openphacts.org/1.5/).
 
 The below will download about ~20 GB and might take some
-time to download and stage (~1 h).
+time to download and stage
+(1-3 h depending on network and disk speed).
 
     sudo docker-compose build
     sudo docker-compose up -d mysqlstaging  # in background
