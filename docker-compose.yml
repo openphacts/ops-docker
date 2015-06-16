@@ -1,61 +1,29 @@
-
-virtuosodata:
-  image: busybox
-  volumes:
-    - /virtuoso
-
-virtuosostaging:
-  #  build: virtuosodata-fromrdf
-  build: virtuosodata-frombackup
-  volumes_from:
-    - virtuosodata
-
-virtuoso:
-  image: stain/virtuoso
-  ports:
-    - "3003:8890"
-  volumes_from:
-    - virtuosodata
-    # TODO: /staging
-  #restart: always
-
-mysqldata:
-  image: busybox
-  volumes:
-    - /var/lib/mysql
-
-mysql:
-  image: mysql
-  volumes_from:
-    - mysqldata
-  environment:
-    - MYSQL_ROOT_PASSWORD=uCie0ahgah
-    - MYSQL_DATABASE=ims
-    - MYSQL_USER=ims
-    - MYSQL_PASSWORD=ims
-  #restart: always
-
-mysqlstaging:
-  build: mysqlstaging
-  links:
-    - mysql
-
-ims:
-  image: openphacts/identitymappingservice
-  ports:
-    - "3004:8080"
-  links:
-    - mysql
-    - mysqlstaging
-  #restart: always
-
-memcached:
-  image: memcached
-  #restart: always
+# Open PHACTS platform
+# Docker Compose configuration
+# https://docs.docker.com/compose/yml/
+#
+# Each entry below defines a docker container, 
+# some of which expose ports, e.g. this exposes
+# the internal port 80 as port 3002 to the world:
+#
+# ports:
+#   - "3002:80"
+# 
+# To change the exposed port, change the number on the left
+#
+# Data is stored in Docker "olumes, which by default would be
+# managed by Docker, e.g. created within /var/lib/docker
+# with a UUID.
+# 
+# To use a different folder/partition, e.g. for backup purposes,
+# speed or disk requirements, modify "volumes:" for the 
+# *data containers further down.
+# 
 
 api:
   image: openphacts/ops-linkeddataapi
   ports:
+    # Remember to match port in API_URL below
     - "3002:80"
   links:
     - ims
@@ -70,8 +38,71 @@ explorer2:
   links:
     - api
   environment:
+    # CHANGE: "localhost" to fully qualified hostname
     - API_URL=http://localhost:3002/
   #restart: always
+  
+virtuoso:
+  image: stain/virtuoso
+  ports:
+    - "3003:8890"
+  volumes_from:
+    - virtuosodata
+    # TODO: /staging
+  #restart: always
+
+virtuosodata:
+  image: busybox
+  volumes:
+    # To specify alternative data folder, use instad:
+    # - /media/big-SSD/virtuoso:/virtuoso
+    - /virtuoso
+
+mysqldata:
+  image: busybox
+  volumes:
+    # To specify alternative data folder, use instead:
+    # - /media/big-SSD/mysql:/var/lib/mysql
+    - /var/lib/mysql
+
+
+mysql:
+  image: mysql
+  volumes_from:
+    - mysqldata
+  environment:
+    - MYSQL_ROOT_PASSWORD=uCie0ahgah
+    - MYSQL_DATABASE=ims
+    - MYSQL_USER=ims
+    - MYSQL_PASSWORD=ims
+  #restart: always
+
+
+
+ims:
+  image: openphacts/identitymappingservice
+  ports:
+    - "3004:8080"
+  links:
+    - mysql
+    - mysqlstaging
+  #restart: always
+
+memcached:
+  image: memcached
+  #restart: always
+
+
+mysqlstaging:
+  build: mysqlstaging
+  links:
+    - mysql
+
+virtuosostaging:
+  #  build: virtuosodata-fromrdf
+  build: virtuosodata-frombackup
+  volumes_from:
+    - virtuosodata
 
 
 #elasticsearch:
