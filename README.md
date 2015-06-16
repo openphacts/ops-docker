@@ -91,23 +91,37 @@ Docker images according to [docker-compose.yml](docker-compose.yml):
   * [memcached](https://registry.hub.docker.com/_/memcached/)
   * [stain/virtuoso](https://registry.hub.docker.com/u/stain/virtuoso/)
 
-Next we'll build the two local data docker containers
+## Building data containers
+
+The Open PHACTS Docker container use separate
+[Data Volume Containers](http://docs.docker.com/userguide/dockervolumes/#creating-and-mounting-a-data-volume-container)
+to contain the Open PHACTS datasets.
+
+On installation you will need to build these local
+data containers and their data staging counterpaths,
 [virtuosodata-frombackup](virtuosodata-frombackup) and
 [mysqlstaging](mysqlstaging), which will download
-the [Open PHACTS 1.5 data](http://data.openphacts.org/1.5/) - this
-is about ~20 GB and might take some time to download and stage.
+the [Open PHACTS 1.5 data](http://data.openphacts.org/1.5/).
 
-    sudo docker-compose up -d mysqlstaging
+The below will download about ~20 GB and might take some
+time to download and stage (~1 h).
+
+    sudo docker-compose build
+    sudo docker-compose up -d mysqlstaging  # in background
     sudo docker-compose run virtuosostaging
-    sudo docker-compose logs   # check progress on mysqlstaging
 
+Once `virtuosostaging` completes, check the progress on `mysqlstaging`:
 
-## Running Open PHACTS Docker images
+    sudo docker-compose logs mysqlstaging
+
+Press **Ctrl-C** to stop following the logs.
+
+## Running Open PHACTS platform
 
 Assuming the previous loading has completed, you can now start
-the Open PHACTS platform:
+the rest of the Open PHACTS platform:
 
-    sudo docker-compose start
+    sudo docker-compose up
 
 This should expose the following services:
 
@@ -116,5 +130,16 @@ This should expose the following services:
   * [http://localhost:8182/QueryExpander/](http://localhost:8182/QueryExpander/) - Open PHACTS IdentityMappingService (IMS)
   * [http://localhost:8895/sparql](http://localhost:8895/sparql) - Virtuoso SPARQL
 
-**Note:** that using the text search in Explorer will use the
-external Text-to-Concept service from conceptiwki.org.
+**Note:** using the text search in Explorer will use the
+remote Text-to-Concept service from conceptiwki.org.
+
+
+## Stopping Open PHACTS platform
+
+To check the status of the Open PHACTS platform, use:
+
+    sudo docker-compose ps
+
+To stop the platform, use:
+
+    sudo docker-compose stop
