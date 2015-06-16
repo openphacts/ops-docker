@@ -1,9 +1,15 @@
 
 virtuosodata:
+  image: busybox
+  volumes:
+    - /virtuoso
+
+virtuosostaging:
   #  build: virtuosodata-fromrdf
   build: virtuosodata-frombackup
-  #command: true # no-op
-      
+  volumes_from:
+    -virtuosodata
+
 virtuoso:
   image: stain/virtuoso
   ports:
@@ -12,13 +18,13 @@ virtuoso:
     - virtuosodata
     # TODO: /staging
   #restart: always
-  
+
 mysqldata:
   image: busybox
   volumes:
     - /var/lib/mysql
 
-mysql:    
+mysql:
   image: mysql
   volumes_from:
     - mysqldata
@@ -45,7 +51,8 @@ ims:
 
 memcached:
   image: memcached
-    
+  #restart: always
+
 api:
   image: openphacts/ops-linkeddataapi
   ports:
@@ -55,7 +62,7 @@ api:
     - memcached
     - virtuoso:sparql
   #restart: always
-    
+
 explorer2:
   image: openphacts/explorer2
   ports:
