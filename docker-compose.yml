@@ -2,7 +2,7 @@
 virtuosodata:
   #  build: virtuosodata-fromrdf
   build: virtuosodata-frombackup
-  command: true # no-op
+  #command: true # no-op
       
 virtuoso:
   image: stain/virtuoso
