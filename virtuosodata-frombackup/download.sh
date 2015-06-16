@@ -35,7 +35,7 @@ mkdir /virtuoso/1
 cd /virtuoso/1
 for x in /download/*tar ; do 
   tar xfv $x 
-  mv *.bp ..
+  mv */*.bp ..
 done
 cd /virtuoso
 rm -rf /virtuoso/1
