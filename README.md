@@ -124,12 +124,13 @@ the rest of the Open PHACTS platform:
 
     sudo docker-compose up
 
-This should expose the following services:
+This should expose the following services (replace `localhost` with your
+server's hostname):
 
-  * [http://localhost:3000/](http://localhost:3000/) - Open PHACTS Explorer Web UI  
-  * [http://localhost:8181/](http://localhost:8181/) - Open PHACTS REST API
-  * [http://localhost:8182/QueryExpander/](http://localhost:8182/QueryExpander/) - Open PHACTS IdentityMappingService (IMS)
-  * [http://localhost:8895/sparql](http://localhost:8895/sparql) - Virtuoso SPARQL
+  * [http://localhost:3001/](http://localhost:3001/) - Open PHACTS Explorer Web UI  
+  * [http://localhost:3002/](http://localhost:3002/) - Open PHACTS REST API
+  * [http://localhost:3003/sparql](http://localhost:3003/sparql) - Virtuoso SPARQL
+  * [http://localhost:3004/QueryExpander/](http://localhost:3004/QueryExpander/) - Open PHACTS IdentityMappingService (IMS)
 
 **Note:** using the text search in Explorer will use the
 remote Text-to-Concept service from conceptiwki.org.
