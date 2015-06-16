@@ -30,10 +30,13 @@ fi
 echo "Verifying checksums"
 sha1sum -c *.sha1
 
-echo "Extracting to /staging"
-mkdir -p /staging
-cd /staging
+echo "Extracting to /virtuoso"
+mkdir /virtuoso/1
+cd /virtuoso/1
 for x in /download/*tar ; do 
   tar xfv $x 
+  mv *.bp ..
 done
+cd /virtuoso
+rm -rf /virtuoso/1
 echo "Data download complete"
