@@ -1,7 +1,5 @@
 #!/bin/sh
 set -e
-BASE="http://data.openphacts.org/1.5/virtuoso/"
-#BASE=http://data.openphacts.org/dev/1.5/virtuoso/
 
 mkdir -p /download
 cd /download
