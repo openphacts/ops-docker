@@ -1,14 +1,15 @@
 FROM mysql
 
-ENV URL http://data.openphacts.org/1.5/ims/ims-1.5-20150519.sql.gz
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget
 
-ADD staging.sh /usr/local/bin/
+ADD download.sh staging.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/*.sh
 
+RUN mkdir /download
+WORKDIR /download
 RUN mkdir /staging
-ADD $URL.sha1 /staging/ims.sql.gz.sha1
-ADD $URL /staging/ims.sql.gz
-RUN sha1sum -c /staging/ims.sql.gz.sha1
+RUN /usr/local/bin/download.sh && mv /download/*.sql.gz /staging/ims.sql.gz
+VOLUME /staging
 
 CMD ["/usr/local/bin/staging.sh"]
 

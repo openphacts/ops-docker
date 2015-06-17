@@ -10,7 +10,7 @@ for file in *.sql.gz ; do
   if ! [ -f $staged ] ; then
     echo "CREATE DATABASE IF NOT EXISTS $db;" >> $sql
     echo "USE $db;" >> $sql
-    gunzip --stdout $file >> $sql
+    gunzip $file >> $sql
     touch $staged
   fi
 done  
