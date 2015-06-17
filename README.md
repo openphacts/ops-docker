@@ -108,14 +108,13 @@ time to download and stage
 (1-3 h depending on network and disk speed).
 
     sudo docker-compose build
-    sudo docker-compose up -d mysqlstaging  # in background
+    sudo docker-compose run -d mysqlstaging  # run in background - note name
     sudo docker-compose run virtuosostaging
 
-Once `virtuosostaging` completes, check the progress on `mysqlstaging`:
+Once `virtuosostaging` completes, check the progress on `mysqlstaging` using
+the noted container name, e.g.:
 
-    sudo docker-compose logs mysqlstaging
-
-Press **Ctrl-C** to stop following the logs.
+    sudo docker logs docker_mysqlstaging_run_2
 
 ## Configuring Open PHACTS platform
 
