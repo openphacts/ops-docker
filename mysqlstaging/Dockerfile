@@ -1,6 +1,6 @@
 FROM mysql
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y axel
 
 ADD download.sh staging.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/*.sh
