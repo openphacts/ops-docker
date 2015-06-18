@@ -8,6 +8,7 @@ for file in *.sql.gz ; do
   db=`echo $file | sed 's/\\.gz$//' | sed 's/\\.sql//'`
   staged=.$db.staged
   if ! [ -f $staged ] ; then
+    echo "Staging $db"
     echo "CREATE DATABASE IF NOT EXISTS $db;" >> $sql
     echo "USE $db;" >> $sql
     gunzip --stdout $file >> $sql
@@ -16,3 +17,4 @@ for file in *.sql.gz ; do
 done  
 
 mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD" < $sql
+echo "mySQL staging finished"
