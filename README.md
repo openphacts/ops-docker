@@ -107,14 +107,9 @@ The below will download about ~20 GB and might take some
 time to download and stage
 (1-3 h depending on network and disk speed).
 
-    sudo docker-compose build
-    sudo docker-compose run -d mysqlstaging  # run in background - note name
+    sudo docker-compose run mysqlstaging
     sudo docker-compose run virtuosostaging
 
-Once `virtuosostaging` completes, check the progress on `mysqlstaging` using
-the noted container name, e.g.:
-
-    sudo docker logs docker_mysqlstaging_run_2
 
 ## Configuring Open PHACTS platform
 
