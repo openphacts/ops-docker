@@ -107,9 +107,8 @@ The below will download about ~20 GB and might take some
 time to download and stage
 (1-3 h depending on network and disk speed). 
 
-    sudo docker-compose up mysqlstaging &
+    sudo docker-compose up mysqlstaging
     sudo docker-compose up virtuosostaging
-    wait
 
 
 ## Configuring Open PHACTS platform
