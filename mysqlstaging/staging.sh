@@ -41,5 +41,5 @@ ls -alh /tmp/staging.sql
 mysql --defaults-file=/tmp/my.conf < $sql
 # Mark as staged
 mv staging/* staged/
+rm -f $sql
 echo "mySQL staging finished"
-rm $sql
