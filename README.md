@@ -181,3 +181,19 @@ To check the status of the Open PHACTS platform, use:
 To stop the platform, use:
 
     sudo docker-compose stop
+
+## Removing the Open PHACTS platform
+
+    sudo docker-compose stop
+    sudo docker-compose rm -v
+
+To recover additional disk space by the docker images, and don't have any other non-running docker images you want to keep:
+
+    sudo docker images -q | xargs sudo docker rmi
+
+Sometimes you might also need to remove all old containers - which would free up the images for the above:
+
+    sudo docker ps -aq | xargs sudo docker rm -v
+
+
+
