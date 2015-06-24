@@ -50,7 +50,6 @@ virtuoso:
     - "3003:8890"
   volumes_from:
     - virtuosodata
-    # TODO: /staging
   #restart: always
 
 virtuosodata:
@@ -87,7 +86,6 @@ ims:
     - "3004:8080"
   links:
     - mysql
-    - mysqlstaging
   #restart: always
 
 memcached:
