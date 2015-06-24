@@ -45,7 +45,8 @@ api:
 
 # SPARQL server
 virtuoso:
-  image: stain/virtuoso
+  #image: stain/virtuoso
+  build: virtuoso-ops
   ports:
     - "3003:8890"
   volumes_from:
