@@ -38,7 +38,7 @@ wait
 echo "mySQL staging"
 ls -alh /tmp/staging.sql
 
-mysql --defaults-file=/tmp/my.conf < $sql
+cat $sql | cpipe -vw -b 8192 | mysql --defaults-file=/tmp/my.conf
 # Mark as staged
 mv staging/* staged/
 rm -f $sql
