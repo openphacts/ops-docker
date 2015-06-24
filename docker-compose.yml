@@ -94,7 +94,8 @@ memcached:
 
 
 mysqlstaging:
-  build: mysqlstaging
+  #build: mysqlstaging
+  image: openphacts/identitymappingservice-staging
   links:
     - mysql
 
