@@ -106,6 +106,8 @@ the [Open PHACTS 1.5 data](http://data.openphacts.org/1.5/).
 The below will download about ~20 GB and might take some
 time to download and stage
 (1-3 h depending on network and disk speed). 
+You will probably want to use `screen` or the 
+`up -d` option if you are using SSH.
 
     sudo docker-compose up mysqlstaging
     sudo docker-compose up virtuosostaging
