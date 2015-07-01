@@ -127,13 +127,14 @@ Unless you are going to access the platform on `localhost` exclusively,
 you **must**  change the `API_URL` variable for the
 `explorer2` container. This URL must use the fully qualified hostname
 as it will be accessed in the browser. The port should remain
-as `3002` unless you have changed the export port for `api`.
+as `3002` unless you have changed the export port for `api`. 
+**Important**: Do **not** include the trailing `/` of the `API_URL`.
 
 For example:
 
 ```yaml
     environment:
-      - API_URL=http://server13.example.com:3002/
+      - API_URL=http://server13.example.com:3002
 ```
 
 
