@@ -29,7 +29,8 @@ explorer2:
     - api
   environment:
     # CHANGE: "localhost" to fully qualified hostname
-    - API_URL=http://localhost:3002/
+    # Do NOT include a trailing /
+    - API_URL=http://localhost:3002
   #restart: always
 
 api:
