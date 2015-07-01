@@ -3,8 +3,18 @@
 The [Open PHACTS Discovery Platform](http://www.openphacts.org/) can be
 installed as a series of [Docker](http://docker.com/) containers.
 
-These containers will also download and use
-the latest Open PHACTS data release, and will provide the
+A _Docker container_ is a kind of sandboxed Linux environment, which typically
+runs a single server instance, e.g. mySQL. Each Container has its own virtual
+filesystem, which is realized from _Docker images_, downloaded from the
+central [Docker Hub Registry](https://registry.hub.docker.com/).
+
+The [Open PHACTS Docker images](https://registry.hub.docker.com/repos/openphacts/)
+provide the different services that form the Open PHACTS platform.
+This page describes how these Docker containers can be installed
+and started using [Docker Compose](http://docs.docker.com/compose/).
+
+The Open PHACTS containers will download and use
+the latest Open PHACTS data release, and provide the
 Virtuoso SPARQL endpoint, the Open PHACTS REST API and the
 Explorer web interface.
 
@@ -17,7 +27,7 @@ is not yet included in this release, and invoke public APIs:
 
 ## Requirements
 
-Minimal hardware requirements:
+Roughly minimal hardware requirements:
   - ~ 100 GB of disk space
   - ~ 16 GB of RAM
   - ~ 4 CPU core
@@ -61,22 +71,41 @@ You will additionally need to install
 used below might be out of date, see the install guide for details.
 
     sudo -i
-    curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/1.3.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 
 To test the installation, try:
 
     sudo docker-compose --version
 
+_Hint: If you add your username to the `docker` group, as suggested by the
+Docker install, and log out and in again, you can run the remaining `docker`
+and `docker-compose` commands without using `sudo`. Note that this would
+effectively be giving your user privileged `root` access to the host machine._
+
+You will need about 100 GB of disk space for the Open PHACTS Docker containers
+and data. Check:
+
+    sudo df -h  /var/lib/docker/
+
+If you do not have enough space on the right permission, you might want
+to edit `-volumes` in `docker-compose.yml`, or simply do the equivalent of:
+
+    sudo service docker stop
+    sudo mv /var/lib/docker /bigdisk/
+    sudo ln -s /bigdisk/docker /var/lib/
+    sudo service docker start
 
 ## Retrieving Open PHACTS Docker images
 
-Download this `ops-platform-setup` repository for the `docker` branch:
+Download this `ops-platform-setup` repository from the `master` branch:
 
-    curl -L https://github.com/openphacts/ops-platform-setup/archive/docker.tar.gz | tar xzv
+    curl -L https://github.com/openphacts/ops-platform-setup/archive/master.tar.gz | tar xzv
     cd ops-platform-setup-docker/docker
 
-To start, make sure you are in the `ops-platform-setup-docker/docker`
+You can also use the above to upgrade the `ops-platform-setup` download.
+
+Now make sure you are in the `ops-platform-setup-docker/docker`
 folder and run:
 
     sudo docker-compose pull
@@ -97,20 +126,32 @@ The Open PHACTS Docker container use separate
 [Data Volume Containers](http://docs.docker.com/userguide/dockervolumes/#creating-and-mounting-a-data-volume-container)
 to contain the Open PHACTS datasets.
 
-On installation you will need to build these local
+On installation you will need to run once these local
 data containers and their data staging counterpaths,
 [virtuosodata-frombackup](virtuosodata-frombackup) and
 [mysqlstaging](mysqlstaging), which will download
 the [Open PHACTS 1.5 data](http://data.openphacts.org/1.5/).
 
+If you do not have sufficient disk space in your
+
 The below will download about ~20 GB and might take some
 time to download and stage
-(1-3 h depending on network and disk speed). 
-You will probably want to use `screen` or the 
-`up -d` option if you are using SSH.
+(~ 2h depending on network and disk speed).
 
-    sudo docker-compose up mysqlstaging
-    sudo docker-compose up virtuosostaging
+    sudo docker-compose up -d mysqlstaging virtuosostaging
+
+To follow the progress, use:
+
+    sudo docker-compose ps
+    sudo docker-compose logs mysqlstaging
+    sudo docker-compose logs virtuosostaging
+
+Note that `docker-compose logs` does not terminate even if its contanier does,
+use *Ctrl-C* to cancel log listing.
+
+Staging is finished when both `mysqlstaging` and
+`virtuosostaging` have exited. Note that the `mysql` container
+will remain up.
 
 
 ## Configuring Open PHACTS platform
@@ -118,7 +159,11 @@ You will probably want to use `screen` or the
 Edit the `docker-compose.yml` file for your host-specific settings.
 This is a [Docker Compose configuration file](https://docs.docker.com/compose/yml/).
 
-You may want to change the exposed ports from `300*` to different ports,
+You can modify `-volumes` to use an explicit folder for the data containers,
+e.g. to use a faster/bigger disk partition. See comments in-line in
+`docker-compose.yml`.
+
+You may want to change the exposed `-port` from `300*` to different ports,
 or avoid their exposure at all. The only requirement here is that the exposed
 port for `api` must correspond to the port in `API_URL`, and that the ports
 are not already in use on the host server.
@@ -127,7 +172,8 @@ Unless you are going to access the platform on `localhost` exclusively,
 you **must**  change the `API_URL` variable for the
 `explorer2` container. This URL must use the fully qualified hostname
 as it will be accessed in the browser. The port should remain
-as `3002` unless you have changed the export port for `api`. 
+as `3002` unless you have changed the export port for `api`.
+
 **Important**: Do **not** include the trailing `/` of the `API_URL`.
 
 For example:
@@ -147,7 +193,7 @@ sparql and api.
 Assuming the previous loading has completed, you can now start
 the rest of the Open PHACTS platform:
 
-    sudo docker-compose up -d
+    sudo docker-compose up --no-recreate -d
 
 You can follow the progress by looking at the logs (press Ctrl-C to stop watching):
 
@@ -198,5 +244,20 @@ Sometimes you might also need to remove all old containers - which would free up
 
     sudo docker ps -aq | xargs sudo docker rm -v
 
+## Upgrading the Open PHACTS platform
 
+Unless a new data release needs to be loaded, you do not need to repeat
+the staging. To upgrade the software within the docker images
+(e.g. newer mySQL or OPS Platform API), do:
 
+    sudo docker-compose pull
+
+Then rebuild the containers to use the newer images:
+
+    sudo docker-compose up -d
+
+If you need to restart staging from blank, then first remove their data volumes:
+
+    sudo docker-compose rm -v mysqldata virtuosodata
+
+Then follow the procedure "Building data containers" above.
