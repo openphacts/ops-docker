@@ -20,7 +20,8 @@ for file in *.sql.gz ; do
     echo "Preparing to stage $db"
     echo "CREATE DATABASE IF NOT EXISTS $db;" >> $sql
     echo "USE $db;" >> $sql
-    gunzip --stdout $file >> $sql
+    echo "SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;" >> $sql
+    gunzip --stdout $file | sed s/InnoDB/MyISAM/ >> $sql
     touch $staging
   fi
 done  
