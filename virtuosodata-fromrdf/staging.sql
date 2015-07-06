@@ -47,9 +47,8 @@ ld_dir('/staging/OCRS/20131111/MESH' , 'SYNONYMS_MESH20131111.nq.gz' , 'http://o
 
 
 -- Uniprot 
-ld_dir('/staging/uniprot' , 'swissprot_28012015.nq.gz' , 'http://purl.uniprot.org' );
-ld_dir('/staging/uniprot' , 'uniparc_28012015.nq.gz' , 'http://purl.uniprot.org' );
-ld_dir('/staging/uniprot' , 'uniref_28012015.nq.gz' , 'http://purl.uniprot.org' );
+ld_dir('/staging/uniprot' , '*.nq.gz' , 'http://purl.uniprot.org' );
+
 
 -- VoID Dataset Descriptors
 ld_dir('/staging/void' , '*.nq.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
