@@ -20,7 +20,10 @@ done
 echo "Downloading RDF datasets to /download"
 
 if [ "$urls" != "" ] ; then
-  wget --no-verbose -A "*.tar*" $urls
+  #wget --no-verbose -A "*.tar*" $urls
+  for url in $urls; do
+      axel --alternate -n8 $url
+  done
 fi
 
 echo "Verifying checksums"
