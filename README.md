@@ -71,7 +71,7 @@ You will additionally need to install
 used below might be out of date, see the install guide for details.
 
     sudo -i
-    curl -L https://github.com/docker/compose/releases/download/1.3.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 To test the installation, try:
@@ -101,12 +101,13 @@ to edit `-volumes` in `docker-compose.yml`, or simply do the equivalent of:
 Download this `ops-platform-setup` repository from the `master` branch:
 
     curl -L https://github.com/openphacts/ops-platform-setup/archive/master.tar.gz | tar xzv
-    cd ops-platform-setup-docker/docker
+    cd ops-platform-setup-master/docker
 
-You can also use the above to upgrade the `ops-platform-setup` download.
+You can also use the above to upgrade the `ops-platform-setup` download, but this would
+overwrite any changes you have made to docker-compose.yml.
 
-Now make sure you are in the `ops-platform-setup-docker/docker`
-folder and run:
+Now make sure you are in the equivalent of the 
+`ops-platform-setup-master/docker` folder and run:
 
     sudo docker-compose pull
 
@@ -119,6 +120,7 @@ Docker images according to [docker-compose.yml](docker-compose.yml):
   * [mysql](https://registry.hub.docker.com/_/mysql/)
   * [memcached](https://registry.hub.docker.com/_/memcached/)
   * [stain/virtuoso](https://registry.hub.docker.com/u/stain/virtuoso/)
+
 
 ## Building data containers
 
