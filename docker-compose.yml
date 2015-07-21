@@ -101,15 +101,37 @@ mysqlstaging:
   links:
     - mysql
 
+# Populate RDF from virtuoso backup download
 virtuosostaging:
-  #  build: virtuosodata-fromrdf
   build: virtuosodata-frombackup
   volumes_from:
     - virtuosodata
+# 
+# To customize RDF dataloading, comment the above 'virtuosostaging' block,
+# and uncomment the below block
 
+## BEGIN custom loading
+
+## Download from data.openphacts.org
+#openphactsrdf:
+#  build: openphacts-rdf
+
+## Load into virtuoso
+#virtuosostaging:
+#  build: virtuosodata-fromrdf
+#  volumes_from: 
+#    - virtuosodata
+#    - openphactsrdf
+
+### END custom loading
+
+
+
+## Future services
 
 #elasticsearch:
 #  image: elasticsearch
 ##  TODO: Data loading
 #ops-search:
 # image: openphacts/ops-search
+
