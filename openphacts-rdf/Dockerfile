@@ -14,9 +14,10 @@ RUN /download/download.sh
 RUN mkdir -p /staging
 COPY staging.sql /staging/
 
-# Expose for linking
-VOLUME /staging 
 
 WORKDIR /
 CMD ["/bin/true"]
 
+# Expose for linking - we'll do this last as it adds a burden
+# to every build step
+VOLUME /staging 
