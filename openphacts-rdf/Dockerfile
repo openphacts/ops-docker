@@ -7,17 +7,18 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget axe
 
 RUN mkdir /download
 WORKDIR /download
-COPY download.sh staging.sql /download/
+# Get *.sha1 first
+RUN wget -e robots=off --no-verbose --recursive --no-directories -A "*.tar*sha1" --no-parent $BASE
+COPY download.sh /usr/local/bin/
 
-RUN /download/download.sh
+VOLUME /download
+# Expose for linking
+VOLUME /staging 
+
+#RUN /download/download.sh
 
 RUN mkdir -p /staging
 COPY staging.sql /staging/
 
+CMD ["/usr/local/bin/download.sh"]
 
-WORKDIR /
-CMD ["/bin/true"]
-
-# Expose for linking - we'll do this last as it adds a burden
-# to every build step
-VOLUME /staging 
