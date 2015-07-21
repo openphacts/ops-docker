@@ -10,11 +10,12 @@ WORKDIR /download
 
 # Load using staging.sql from stain/virtuoso
 # The below must be run on a single command to ensure the volumes
-# are not wiped out
+# are not wiped out. We'll invoke staging.sh via entrypoint
+# to allow virtuoso to consume lots of RAM
 RUN mkdir /virtuoso-staging
 RUN /tmp/download.sh && \
 	cp /tmp/staging.sql /staging/ && \
-	/usr/local/bin/staging.sh && \
+	/docker-entrypoint.sh /usr/local/bin/staging.sh && \
 	sleep 5 && \
 	echo "Archiving /virtuoso" && \
 	tar cfv /virtuoso.tar /virtuoso && \
