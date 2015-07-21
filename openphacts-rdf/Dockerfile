@@ -12,7 +12,7 @@ COPY download.sh staging.sql /download/
 RUN /download/download.sh
 
 RUN mkdir -p /staging
-COPY staging.sql /staging
+COPY staging.sql /staging/
 
 # Expose for linking
 VOLUME /staging 
