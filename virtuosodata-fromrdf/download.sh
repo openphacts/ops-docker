@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
-BASE=http://data.openphacts.org/dev/1.5/rdf/
+
+# Inherited from Dockerfile
+#BASE=http://data.openphacts.org/dev/1.5/rdf/
+cd /download
 
 rm -f *.sha1
 # Get *.sha1 first
@@ -34,5 +37,7 @@ mkdir -p /staging
 cd /staging
 for x in /download/*tar ; do 
   tar xfv $x 
+  # Delete extracted tar file
+  rm $x
 done
 echo "Data download complete"

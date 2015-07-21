@@ -1,27 +1,22 @@
-FROM stain/virtuoso
+FROM ubuntu:14.04
+
+# Where to download from
+ENV BASE http://data.openphacts.org/dev/1.5/rdf/
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget axel
 
-COPY download.sh staging.sql /tmp/
-
 RUN mkdir /download
-VOLUME /download
 WORKDIR /download
+COPY download.sh staging.sql /download/
 
-# Load using staging.sql from stain/virtuoso
-# The below must be run on a single command to ensure the volumes
-# are not wiped out. We'll invoke staging.sh via entrypoint
-# to allow virtuoso to consume lots of RAM
-RUN mkdir /virtuoso-staging
-RUN /tmp/download.sh && \
-	cp /tmp/staging.sql /staging/ && \
-	/docker-entrypoint.sh /usr/local/bin/staging.sh && \
-	sleep 5 && \
-	echo "Archiving /virtuoso" && \
-	tar cfv /virtuoso.tar /virtuoso && \
-	echo "Done"
-# Move it back at runtime to the fresh /virtuoso volume
-# WARNING: This requires ***loads of extra disk space
+RUN /download/download.sh
+
+RUN mkdir -p /staging
+COPY staging.sql /staging
+
+# Expose for linking
+VOLUME /staging 
+
 WORKDIR /
-CMD ["tar", "xfv", "/virtuoso.tar"]
+CMD ["/bin/true"]
 
