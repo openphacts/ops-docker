@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
-# wait for mysql
-sleep 5 &
+# wait for mysql at least 30 seconds
+MYSQL_SLEEP=30
+sleep $MYSQL_SLEEP &
 
 sql=/tmp/staging.sql
 rm -f $sql
@@ -33,8 +34,8 @@ echo "port=$MYSQL_PORT_3306_TCP_PORT" >> /tmp/my.conf
 echo "user=root" >> /tmp/my.conf
 echo "password=$MYSQL_ENV_MYSQL_ROOT_PASSWORD" >> /tmp/my.conf
 
-# ensure at least 5 seconds has passed
-echo "Waiting for mySQL"
+# hope that mysql has started
+echo "Waiting for mySQL (up to $MYSQL_SLEEP seconds)"
 wait
 echo "mySQL staging"
 ls -alh /tmp/staging.sql
