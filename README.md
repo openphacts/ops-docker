@@ -140,7 +140,7 @@ The below will download about ~20 GB and might take some
 time to download and stage
 (~ 2h depending on network and disk speed).
 
-    sudo docker-compose up -d mysqlstaging virtuosostaging
+    sudo docker-compose up --no-recreate -d mysqlstaging virtuosostaging
 
 To follow the progress, use:
 
@@ -148,12 +148,60 @@ To follow the progress, use:
     sudo docker-compose logs mysqlstaging
     sudo docker-compose logs virtuosostaging
 
-Note that `docker-compose logs` does not terminate even if its contanier does,
+Note that `docker-compose logs` may not terminate even if its contanier does,
 use *Ctrl-C* to cancel log listing.
+
+Expected output from `mysqlstaging`:
+
+```
+mysqlstaging_1 | Preparing to stage ims
+mysqlstaging_1 | Waiting for mySQL
+mysqlstaging_1 | mySQL staging
+mysqlstaging_1 | -rw-r--r-- 1 root root 1.2G Jul 22 15:43 /tmp/staging.sql
+mysqlstaging_1 |  out: 8737.224ms at  937.6kB/s ( 937.6kB/s avg)    8.0MB
+mysqlstaging_1 |  out: 1009.888ms at    7.9MB/s (   1.6MB/s avg)   16.0MB
+..
+mysqlstaging_1 |  out: 677.916ms at   11.8MB/s (   8.6MB/s avg)    1.1GB
+mysqlstaging_1 |  out: 761.496ms at   10.5MB/s (   8.6MB/s avg)    1.1GB
+(long wait)
+mysqlstaging_1 | mySQL staging finished
+
+```
+
+Expected output from `virtuosostaging`:
+
+```
+virtuosostaging_1 | Downloading checksums from http://data.openphacts.org/dev/1.5/virtuoso/
+virtuosostaging_1 | 2015-07-22 15:43:29 URL:http://data.openphacts.org/dev/1.5/virtuoso/ [1634/1634] -> "index.html" [1]
+virtuosostaging_1 | 2015-07-22 15:43:29 URL:http://data.openphacts.org/dev/1.5/virtuoso/?C=N;O=D [1634/1634] -> "index.html?C=N;O=D" [1]
+..
+virtuosostaging_1 | Downloaded: 29 files, 1.5M in 0.1s (10.2 MB/s)
+virtuosostaging_1 | Downloading Virtuoso backup set to /download
+virtuosostaging_1 | Initializing download: http://data.openphacts.org/dev/1.5/virtuoso/ghard-dump-20150415.tar
+virtuosostaging_1 | File size: 21715220480 bytes
+virtuosostaging_1 | Opening output file ghard-dump-20150415.tar
+virtuosostaging_1 | Starting download
+(long wait)
+
+
+```
+
+
+You may want to inspect the download progress:
+
+```
+stain@heater:~/ops-platform-setup/docker$ docker exec docker_virtuosostaging_1 du -hs /download
+5.5G    /download
+
+
+```
+
 
 Staging is finished when both `mysqlstaging` and
 `virtuosostaging` have exited. Note that the `mysql` container
-will remain up.
+will remain up. Check with:
+
+    sudo docker-compose ps
 
 
 ## Configuring Open PHACTS platform
