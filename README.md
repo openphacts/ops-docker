@@ -165,6 +165,7 @@ mysqlstaging_1 |  out: 677.916ms at   11.8MB/s (   8.6MB/s avg)    1.1GB
 mysqlstaging_1 |  out: 761.496ms at   10.5MB/s (   8.6MB/s avg)    1.1GB
 (long wait)
 mysqlstaging_1 | mySQL staging finished
+docker_mysqlstaging_1 exited with code 0
 
 ```
 
@@ -182,18 +183,30 @@ virtuosostaging_1 | File size: 21715220480 bytes
 virtuosostaging_1 | Opening output file ghard-dump-20150415.tar
 virtuosostaging_1 | Starting download
 (long wait)
-
-
+virtuosostaging_1 | ghard-dump-20150415/bak_325.bp
+virtuosostaging_1 | Data download complete
+virtuosostaging_1 | Loading bak_ -- 677 files
+(..)
+virtuosostaging_1 | 08:46:24 OpenLink Virtuoso Universal Server
+virtuosostaging_1 | 08:46:24 Version 07.20.3212-pthreads for Linux as of Jun  3 2015
+virtuosostaging_1 | 08:46:24 uses parts of OpenSSL, PCRE, Html Tidy
+virtuosostaging_1 | 08:46:24 Begin to restore with file prefix bak_
+virtuosostaging_1 | 08:46:24 --> Backup file # 1 [0x3F02-0x74-0x8A]
+virtuosostaging_1 | 08:46:25 --> Backup file # 2 [0x3F02-0x74-0x8A]
+(..)
+virtuosostaging_1 | 09:13:35 --> Backup file # 675 [0x3F02-0x74-0x8A]
+virtuosostaging_1 | 09:13:36 --> Backup file # 676 [0x3F02-0x74-0x8A]
+virtuosostaging_1 | 09:13:37 End of restoring from backup, 6751701 pages
+virtuosostaging_1 | 09:13:37 Server exiting
+virtuosostaging_1 | Loading completed
+docker_virtuosostaging_1 exited with code 0
 ```
-
 
 You may want to inspect the download progress:
 
 ```
 stain@heater:~/ops-platform-setup/docker$ docker exec docker_virtuosostaging_1 du -hs /download
 5.5G    /download
-
-
 ```
 
 
