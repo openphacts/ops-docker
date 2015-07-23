@@ -62,6 +62,8 @@ installation for [Ubuntu 14.04](https://docs.docker.com/installation/ubuntulinux
     sudo -i
     wget -qO- https://get.docker.com/ | sh
 
+_Note: If you install on Centos 6.6, you should instead install `docker-io` from yum, using `yum install epel-release -y` and `yum install docker-io`. For newer distributions. the `get.docker.com` approach above is preferred as it gives a newer Docker._
+
 To test the installation, try:
 
     sudo docker run hello-world
