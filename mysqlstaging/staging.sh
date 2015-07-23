@@ -23,9 +23,17 @@ for file in *.sql.gz ; do
     echo "USE $db;" >> $sql
     echo "SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;" >> $sql
     gunzip --stdout $file | sed s/InnoDB/MyISAM/ >> $sql
+    # workaround for 1.5 mysql dump
+    echo 'UPDATE mappingSet SET justification="http://semanticscience.org/resource/SIO_000985" WHERe sourceDataSource="ConceptWiki" AND justification="http://example.com/ConceptWikiProtein";' >> $sql
     touch $staging
   fi
 done  
+if ! [ -f $sql ] ; then
+  echo "mySQL already staged"
+  exit 0
+fi
+
+
 
 # To avoid password warnings..
 echo "[client]" > /tmp/my.conf
