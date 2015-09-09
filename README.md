@@ -6,7 +6,7 @@ installed as a series of [Docker](http://docker.com/) containers.
 * [Overview](#overview)
 * [Requirements](#requirements)
 * [Docker installation](#docker-installation)
-  * [Disk space for Docker](#docker-space-for-docker)
+  * [Disk space for Docker](#disk-space-for-docker)
 * [Retrieving Open PHACTS Docker Images](#retrieving-open-phacts-docker-images)
 * [Building data containers](#building-data-containers)
 * [Configuring Open PHACTS platform](#configuring-open-phacts-platform)
