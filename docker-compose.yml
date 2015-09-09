@@ -42,13 +42,14 @@ api:
     - ims
     - memcached
     - virtuoso:sparql
-  environment:
+  #environment:
   #  - CRS=https://ops.rsc.org/api/v1/
   #  - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
   #restart: always
 
 # SPARQL server
 virtuoso:
+  container_name: ops-virtuoso
   #image: stain/virtuoso
   build: virtuoso-ops
   ports:
@@ -58,13 +59,16 @@ virtuoso:
   #restart: always
 
 virtuosodata:
+  container_name: ops-virtuosodata
   image: busybox
   volumes:
     # To specify alternative data folder, use instad:
     # - /media/big-SSD/virtuoso:/virtuoso
     - /virtuoso
+  container_name: ops-virtuosodata
 
 mysqldata:
+  container_name: ops-mysqldata
   image: busybox
   volumes:
     # To specify alternative data folder, use instead:
@@ -73,6 +77,7 @@ mysqldata:
 
 
 mysql:
+  container_name: ops-mysql
   image: mysql
   volumes_from:
     - mysqldata
@@ -83,9 +88,8 @@ mysql:
     - MYSQL_PASSWORD=ims
   #restart: always
 
-
-
 ims:
+  container_name: ops-ims
   image: openphacts/identitymappingservice
   ports:
     - "3004:8080"
@@ -94,11 +98,13 @@ ims:
   #restart: always
 
 memcached:
+  container_name: ops-memcached
   image: memcached
   #restart: always
 
 
 mysqlstaging:
+  container_name: ops-mysqlstaging
   #build: mysqlstaging
   image: openphacts/identitymappingservice-staging
   links:
@@ -106,6 +112,7 @@ mysqlstaging:
 #
 # Populate RDF from virtuoso backup download
 virtuosostaging:
+  container_name: ops-virtuosostaging
   build: virtuosodata-frombackup
   volumes_from:
     - virtuosodata
@@ -118,6 +125,7 @@ virtuosostaging:
 
 ### Download from data.openphacts.org
 #openphactsrdf:
+#  container_name: ops-openphactsrdf
 #  build: openphacts-rdf
 #  volumes:
 #    # To specify alternative data folder, use instad:
@@ -129,6 +137,7 @@ virtuosostaging:
 #
 ### Load into virtuoso
 #virtuosostagingrdf:
+#  container_name: ops-virtuosostagingrdf
 #  build: virtuosodata-fromrdf
 #  volumes_from:
 #    - virtuosodata
@@ -141,7 +150,9 @@ virtuosostaging:
 ## Future services
 
 #elasticsearch:
+#  container_name: ops-elasticsearch
 #  image: elasticsearch
 ##  TODO: Data loading
 #ops-search:
+# container_name: ops-search
 # image: openphacts/ops-search
