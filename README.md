@@ -3,6 +3,21 @@
 The [Open PHACTS Discovery Platform](http://www.openphacts.org/) can be
 installed as a series of [Docker](http://docker.com/) containers.
 
+* [Overview](#overview)
+* [Requirements](#requirements)
+* [Docker installation](#docker-installation)
+  * [Disk space for Docker](#docker-space-for-docker)
+* [Retrieving Open PHACTS Docker Images](#retrieving-open-phacts-docker-images)
+* [Building data containers](#building-data-containers)
+* [Configuring Open PHACTS platform](#configuring-open-phacts-platform)
+  * [External services](#external-services)
+* [Running the Open PHACTS platform](#running-the-open-phacts-platform)
+* [Stopping the Open PHACTS platform](#stopping-the-open-phacts-platform)
+* [Removing the Open PHACTS platform](#removing-the-open-phacts-platform)
+* [Upgrading the Open PHACTS platform](#upgrading-the-open-phacts-platform)
+
+## Overview
+
 A _Docker container_ is a kind of sandboxed Linux environment, which typically
 runs a single server instance, e.g. mySQL. Each Container has its own virtual
 filesystem, which is realized from _Docker images_, downloaded from the
@@ -24,7 +39,8 @@ is not yet included in this release.
 - Chemical Resolution Service APIs (e.g. SMILEStoCSID and Similarity search)
 - Text to Concept search calls
 
-You can modify `docker-compose.yml` to enable usage of the public APIs for these.
+You can modify `docker-compose.yml` to enable usage of the public APIs for these,
+see the [External services](-external-services) section below.
 
 
 ## Requirements
@@ -46,6 +62,8 @@ Prerequisites:
   - Recent [Docker Compose](http://docs.docker.com/compose/install/)
   - Fast Internet connection (during build of data containers)
 
+Note that the disk space must be
+[made available for Docker](#disk-space-for-docker)
 
 ## Docker installation
 
@@ -75,9 +93,9 @@ You will additionally need to install
 used below might be out of date, see the install guide for details.
 
 ```shell
-    sudo -i
-    curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
+sudo -i
+curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 ```
 
 To test the installation, try:
@@ -89,15 +107,20 @@ Docker install, and log out and in again, you can run the remaining `docker`
 and `docker-compose` commands without using `sudo`. Note that this would
 effectively be giving your user privileged `root` access to the host machine._
 
-## Disk space for Docker
+### Disk space for Docker
 
-You will need about 100 GB of disk space for the Open PHACTS Docker containers
+You will need about 150 GB of disk space for the Open PHACTS Docker containers
 and data. Check on the docker host:
 
     sudo df -h /var/lib/docker/
 
 If you do not have enough space on the right permission, you might want
-to edit `-volumes` in `docker-compose.yml`, or simply do the equivalent of:
+to edit the `-volumes` sections in `docker-compose.yml` to use alternative
+folders for the most disk hungry containers. Note that you still need
+about 15 GB of disk space in `/var/lib/docker` for the
+downloaded Docker images.
+
+Another simpler option is to do the equivalent of:
 
     sudo service docker stop
     sudo mv /var/lib/docker /bigdisk/
@@ -106,6 +129,9 @@ to edit `-volumes` in `docker-compose.yml`, or simply do the equivalent of:
 
 If you are using a virtual machine to run Docker (e.g. on Windows and OS X)
 ensure you have allocated enough disk space (and memory) to the virtual machine.
+
+It is **not recommended** to use an externally mounted volume
+(e.g. USB, NFS or network share) for the Docker disk space.
 
 ## Retrieving Open PHACTS Docker images
 
@@ -262,7 +288,7 @@ For example:
 sparql and api.
 
 
-### Configure external services
+### External services
 
 The APIs for the [Chemical Resolution Service](https://ops.rsc.org/)
 and [ConceptWiki](http://conceptwiki.org/) are not currently
@@ -295,8 +321,7 @@ Usage of the public Open PHACTS API is covered by the
 [Terms of Use](https://www.openphacts.org/terms-and-conditions/terms-of-use) and
 [Privacy Policy](https://www.openphacts.org/terms-and-conditions/privacy-policy).
 
-
-## Running Open PHACTS platform
+## Running the Open PHACTS platform
 
 Assuming the previous loading has completed, you can now start
 the rest of the Open PHACTS platform:
@@ -329,7 +354,7 @@ server's hostname):
 remote Text-to-Concept service from conceptiwki.org.
 
 
-## Stopping Open PHACTS platform
+## Stopping the Open PHACTS platform
 
 To check the status of the Open PHACTS platform, use:
 
