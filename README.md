@@ -19,23 +19,25 @@ Virtuoso SPARQL endpoint, the Open PHACTS REST API and the
 Explorer web interface.
 
 **External services**: The following components of the Open PHACTS platform
-is not yet included in this release, and invoke public APIs:
+is not yet included in this release.
 
-- Chemical structure search APIs (e.g. SMILEStoCSID and Similarity search) calls http://ops.rsc.org/
-- Text to Concept search calls http://conceptwiki.openlinksw.com/
+- Chemical Resolution Service APIs (e.g. SMILEStoCSID and Similarity search)
+- Text to Concept search calls
+
+You can modify `docker-compose.yml` to enable usage of the public APIs for these.
 
 
 ## Requirements
 
 Roughly minimal hardware requirements:
-  - ~ 100 GB of disk space
-  - ~ 16 GB of RAM
+  - ~ 150 GB of disk space
+  - ~ 10 GB of RAM
   - ~ 4 CPU core
 
 Recommended hardware:
   - ~ 250 GB of SSD disk
   - ~ 128 GB of RAM
-  - > 8 CPU cores
+  - ~ 8 CPU cores
 
 Prerequisites:
 
@@ -72,9 +74,11 @@ You will additionally need to install
 [Docker Compose](http://docs.docker.com/compose/install/). The exact version
 used below might be out of date, see the install guide for details.
 
+```shell
     sudo -i
-    curl -L https://github.com/docker/compose/releases/download/1.3.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+```
 
 To test the installation, try:
 
@@ -85,10 +89,12 @@ Docker install, and log out and in again, you can run the remaining `docker`
 and `docker-compose` commands without using `sudo`. Note that this would
 effectively be giving your user privileged `root` access to the host machine._
 
-You will need about 100 GB of disk space for the Open PHACTS Docker containers
-and data. Check:
+## Disk space for Docker
 
-    sudo df -h  /var/lib/docker/
+You will need about 100 GB of disk space for the Open PHACTS Docker containers
+and data. Check on the docker host:
+
+    sudo df -h /var/lib/docker/
 
 If you do not have enough space on the right permission, you might want
 to edit `-volumes` in `docker-compose.yml`, or simply do the equivalent of:
@@ -98,6 +104,9 @@ to edit `-volumes` in `docker-compose.yml`, or simply do the equivalent of:
     sudo ln -s /bigdisk/docker /var/lib/
     sudo service docker start
 
+If you are using a virtual machine to run Docker (e.g. on Windows and OS X)
+ensure you have allocated enough disk space (and memory) to the virtual machine.
+
 ## Retrieving Open PHACTS Docker images
 
 Download this `ops-platform-setup` repository from the `master` branch:
@@ -106,9 +115,9 @@ Download this `ops-platform-setup` repository from the `master` branch:
     cd ops-platform-setup-master/docker
 
 You can also use the above to upgrade the `ops-platform-setup` download, but this would
-overwrite any changes you have made to docker-compose.yml.
+overwrite any changes you have made to `docker-compose.yml`.
 
-Now make sure you are in the equivalent of the 
+Now make sure you are in the equivalent of the
 `ops-platform-setup-master/docker` folder and run:
 
     sudo docker-compose pull
@@ -251,6 +260,40 @@ For example:
 
 **TODO**: Make a wrapping webserver that provides a common port 80 for api,
 sparql and api.
+
+
+### Configure external services
+
+The APIs for the [Chemical Resolution Service](https://ops.rsc.org/)
+and [ConceptWiki](http://conceptwiki.org/) are not currently
+available as Docker images. The default configuration for the
+Open PHACTS Docker platform is to not access these APIs.
+
+The APIs call below rely on these services and would therefore not
+normally be functional in this Docker installation:
+
+- `/structure?inchi={inchi}`
+- `/structure?inchi_key={inchi_key}`
+- `/structure?smiles={smiles}`
+- `/structure/similarity?searchOptions.Molecule={searchOptions.Molecule}`
+- `/structure/substructure?searchOptions.Molecule={searchOptions.Molecule}`
+- `/structure/exact?searchOptions.Molecule={searchOptions.Molecule}`
+- `/search/freetext?q={q}`
+- `/search/byTag?q={q}&uuid={uuid}`
+- `/getConceptDescription?uuid={uuid}`
+
+To enable usage of the public APIs as a fallback for these calls,
+modify `docker-compose.yml` to uncomment these lines (keep the indendation):
+
+```yaml
+  environment:
+    - CRS=https://ops.rsc.org/api/v1/
+    - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
+```
+
+Usage of the public Open PHACTS API is covered by the
+[Terms of Use](https://www.openphacts.org/terms-and-conditions/terms-of-use) and
+[Privacy Policy](https://www.openphacts.org/terms-and-conditions/privacy-policy).
 
 
 ## Running Open PHACTS platform

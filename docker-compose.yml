@@ -42,6 +42,9 @@ api:
     - ims
     - memcached
     - virtuoso:sparql
+  environment:
+  #  - CRS=https://ops.rsc.org/api/v1/
+  #  - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
   #restart: always
 
 # SPARQL server
@@ -100,13 +103,13 @@ mysqlstaging:
   image: openphacts/identitymappingservice-staging
   links:
     - mysql
-# 
+#
 # Populate RDF from virtuoso backup download
 virtuosostaging:
   build: virtuosodata-frombackup
   volumes_from:
     - virtuosodata
-# 
+#
 # To customize RDF dataloading, comment OUT the above 'virtuosostaging' block,
 # uncomment the below block, and then run
 # docker-compose up -d virtuosostagingrdf
@@ -127,7 +130,7 @@ virtuosostaging:
 ### Load into virtuoso
 #virtuosostagingrdf:
 #  build: virtuosodata-fromrdf
-#  volumes_from: 
+#  volumes_from:
 #    - virtuosodata
 #    - openphactsrdf
 
@@ -142,4 +145,3 @@ virtuosostaging:
 ##  TODO: Data loading
 #ops-search:
 # image: openphacts/ops-search
-
