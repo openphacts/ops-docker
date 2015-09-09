@@ -58,12 +58,12 @@ Recommended hardware:
 Prerequisites:
 
   - Recent x64 Linux distribution (e.g. Ubuntu 14.04 LTS, Centos 7)
-  - Recent [Docker](https://docs.docker.com/installation/#installation)
-  - Recent [Docker Compose](http://docs.docker.com/compose/install/)
+  - [Docker](https://docs.docker.com/installation/#installation) 1.8 or later
+  - [Docker Compose](http://docs.docker.com/compose/install/) 1.4.0 or later
   - Fast Internet connection (during build of data containers)
 
-Note that the disk space must be
-[made available for Docker](#disk-space-for-docker)
+Note that the you would have to make the
+[disk space available for Docker](#disk-space-for-docker).
 
 ## Docker installation
 
@@ -72,7 +72,9 @@ These Docker images have been tested on:
 * Ubuntu 14.04 LTS
 
 These images have **not** been tested with
-Docker virtualization on non-Linux platforms (OS X, Windows).
+Docker virtualization on non-Linux platforms (OS X, Windows)
+or behind a firewall.
+
 
 See the
 [Docker installation](https://docs.docker.com/installation/#installation)
@@ -81,8 +83,6 @@ installation for [Ubuntu 14.04](https://docs.docker.com/installation/ubuntulinux
 
     sudo -i
     wget -qO- https://get.docker.com/ | sh
-
-_Note: If you install on Centos 6.6, you should instead install `docker-io` from yum, using `yum install epel-release -y` and `yum install docker-io`. For newer distributions. the `get.docker.com` approach above is preferred as it gives a newer Docker._
 
 To test the installation, try:
 
@@ -105,7 +105,8 @@ To test the installation, try:
 _Hint: If you add your username to the `docker` group, as suggested by the
 Docker install, and log out and in again, you can run the remaining `docker`
 and `docker-compose` commands without using `sudo`. Note that this would
-effectively be giving your user privileged `root` access to the host machine._
+effectively be giving your user privileged `root` access to the host machine
+without password verification._
 
 ### Disk space for Docker
 
