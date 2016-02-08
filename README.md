@@ -23,7 +23,7 @@ runs a single server instance, e.g. mySQL. Each Container has its own virtual
 filesystem, which is realized from _Docker images_, downloaded from the
 central [Docker Hub Registry](https://registry.hub.docker.com/).
 
-The [Open PHACTS Docker images](https://registry.hub.docker.com/repos/openphacts/)
+The [Open PHACTS Docker images](https://hub.docker.com/u/openphacts/)
 provide the different services that form the Open PHACTS platform.
 This page describes how these Docker containers can be installed
 and started using [Docker Compose](http://docs.docker.com/compose/).
@@ -82,6 +82,7 @@ guide for details for your Linux distribution. Here's the short-hand
 installation for [Ubuntu 14.04](https://docs.docker.com/installation/ubuntulinux/):
 
     sudo -i
+    apt-get -y dist-upgrade
     wget -qO- https://get.docker.com/ | sh
 
 To test the installation, try:
@@ -94,7 +95,7 @@ used below might be out of date, see the install guide for details.
 
 ```shell
 sudo -i
-curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -105,7 +106,7 @@ To test the installation, try:
 _Hint: If you add your username to the `docker` group, as suggested by the
 Docker install, and log out and in again, you can run the remaining `docker`
 and `docker-compose` commands without using `sudo`. Note that this would
-effectively be giving your user privileged `root` access to the host machine
+effectively be giving that user privileged `root` access to the host machine
 without password verification._
 
 ### Disk space for Docker
@@ -129,7 +130,8 @@ Another simpler option is to do the equivalent of:
     sudo service docker start
 
 If you are using a virtual machine to run Docker (e.g. on Windows and OS X)
-ensure you have allocated enough disk space (and memory) to the virtual machine.
+ensure you have allocated enough disk space (and memory) to the virtual machine's
+file system.
 
 It is **not recommended** to use an externally mounted volume
 (e.g. USB, NFS or network share) for the Docker disk space.
@@ -138,14 +140,14 @@ It is **not recommended** to use an externally mounted volume
 
 Download this `ops-platform-setup` repository from the `master` branch:
 
-    curl -L https://github.com/openphacts/ops-platform-setup/archive/master.tar.gz | tar xzv
-    cd ops-platform-setup-master/docker
+    curl -L https://github.com/openphacts/ops-docker/archive/master.tar.gz | tar xzv
+    cd ops-docker
 
-You can also use the above to upgrade the `ops-platform-setup` download, but this would
+You can also use the above to upgrade the `ops-docker` download, but this would
 overwrite any changes you have made to `docker-compose.yml`.
 
 Now make sure you are in the equivalent of the
-`ops-platform-setup-master/docker` folder and run:
+`ops-docker` folder and run:
 
     sudo docker-compose pull
 
