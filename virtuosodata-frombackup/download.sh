@@ -47,7 +47,8 @@ for x in /download/*tar ; do
   cd */data/..
   sha1sum -c tagmanifest-sha1.txt manifest-sha1.txt
   mv data/*.bp /virtuoso
-  rm -f $x
+  cd /virtuoso
+  rm -f $x /virtuoso/1
 done
 cd /virtuoso
 echo "Data download complete"
