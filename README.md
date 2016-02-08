@@ -58,8 +58,8 @@ Recommended hardware:
 Prerequisites:
 
   - Recent x64 Linux distribution (e.g. Ubuntu 14.04 LTS, Centos 7)
-  - [Docker](https://docs.docker.com/installation/#installation) 1.8 or later
-  - [Docker Compose](http://docs.docker.com/compose/install/) 1.4.0 or later
+  - [Docker](https://docs.docker.com/installation/#installation) 1.7.1 or later
+  - [Docker Compose](http://docs.docker.com/compose/install/) 1.5.2 or later
   - Fast Internet connection (during build of data containers)
 
 Note that the you would have to make the
@@ -68,7 +68,7 @@ Note that the you would have to make the
 ## Docker installation
 
 These Docker images have been tested on:
-* Centos 6.6
+* Centos 6.7 (with kernel 3.18.21-17.el6 - `yum install centos-release-xen ; yum update`)
 * Ubuntu 14.04 LTS
 
 These images have **not** been tested with
