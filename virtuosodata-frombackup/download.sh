@@ -41,7 +41,9 @@ mkdir /virtuoso/1
 cd /virtuoso/1
 for x in /download/*tar ; do
   tar xfv $x
-  mv */*.bp ..
+  sha1sum -c */tagmanifest-sha1.txt */manifest-sha1.txt
+  mv */data/*.bp /virtuoso
+  rm -f */*manifest*
 done
 cd /virtuoso
 rm -rf /virtuoso/1
