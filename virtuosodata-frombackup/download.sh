@@ -9,6 +9,7 @@ rm -f *.sha1
 echo "Downloading checksums from $BASE"
 wget -e robots=off --no-verbose --recursive --no-directories -A "*.tar*sha1" --no-parent $BASE
 
+echo "Checking /download"
 urls=""
 for sha in *.sha1; do
   file=`echo $sha | sed s/.sha1$//`
@@ -29,6 +30,7 @@ echo "Downloading Virtuoso backup set to /download"
 for url in $urls ; do
   axel --alternate --num-connections=6 $url
 done
+echo "Downloaded."
 #if [ "$urls" != "" ] ; then
 #  wget -A "*.tar*" $urls
 #fi
@@ -37,14 +39,15 @@ echo "Verifying checksums"
 sha1sum -c *.sha1
 
 echo "Extracting to /virtuoso"
-mkdir /virtuoso/1
-cd /virtuoso/1
 for x in /download/*tar ; do
+  rm -rf /virtuoso/1
+  mkdir /virtuoso/1
+  cd /virtuoso/1
   tar xfv $x
-  sha1sum -c */tagmanifest-sha1.txt */manifest-sha1.txt
-  mv */data/*.bp /virtuoso
-  rm -f */*manifest*
+  cd */data/..
+  sha1sum -c tagmanifest-sha1.txt manifest-sha1.txt
+  mv data/*.bp /virtuoso
+  rm -f $x
 done
 cd /virtuoso
-rm -rf /virtuoso/1
 echo "Data download complete"
