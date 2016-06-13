@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-BASE=http://data.openphacts.org/2.0/ims/
+BASE=https://data.openphacts.org/commercial/2.0/ims/
 NAME=mysql-for-ims-2.0-20151214.sql.gz
 
 url=${BASE}${NAME}

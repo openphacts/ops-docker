@@ -1,9 +1,9 @@
 FROM ubuntu:14.04
 
 # Where to download from
-ENV BASE http://data.openphacts.org/commercial/2.0/rdf/
+ENV BASE https://data.openphacts.org/commercial/2.0/rdf/
 # Non-commercial users might instead use
-#ENV BASE http://data.openphacts.org/non-commercial/2.0/rdf/
+#ENV BASE https://data.openphacts.org/non-commercial/2.0/rdf/
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget axel
 
