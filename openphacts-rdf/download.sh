@@ -2,7 +2,7 @@
 set -e
 
 # Inherited from Dockerfile
-#BASE=http://data.openphacts.org/dev/1.5/rdf/
+#BASE=http://data.openphacts.org/commercial/2.0/rdf/
 cd /download
 
 shas=`find -name '*.sha1'`
