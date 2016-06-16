@@ -27,16 +27,23 @@ echo "Downloading Virtuoso backup set to /download"
 # 
 # In a rush? Try --num-connection=40 and
 # you might get 50 MB/s
-for url in $urls ; do
-  axel --alternate --num-connections=6 $url
-done
+## DISABLED as axel in Ubuntu 14.04 does not support https
+#for url in $urls ; do
+#  axel --alternate --num-connections=6 $url
+#done
+if [ "$urls" != "" ] ; then
+  wget -A "*.tar*" $urls
+fi
 echo "Downloaded."
-#if [ "$urls" != "" ] ; then
-#  wget -A "*.tar*" $urls
-#fi
 
 echo "Verifying checksums"
-sha1sum -c *.sha1
+
+# Assuming Maven repository-style sha1 files
+# without filenames or newline
+for sha in *.sha1 ; do 
+	(cat $sha ; echo " $sha" | sed "s/.sha1//" ) | sha1sum -c - 
+done
+
 
 echo "Extracting to /virtuoso"
 for x in /download/*tar ; do
