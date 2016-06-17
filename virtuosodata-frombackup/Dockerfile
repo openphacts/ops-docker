@@ -9,8 +9,7 @@ RUN mkdir /download
 VOLUME /download
 
 # Where to download Virtuoso backup dump from?
-#ENV BASE http://data.openphacts.org/1.5/virtuoso/
-ENV BASE https://data.openphacts.org/commercial/2.0/virtuoso/
+ENV BASE https://data.openphacts.org/free/2.0/virtuoso/
 
 
 CMD /usr/local/bin/load.sh
