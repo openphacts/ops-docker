@@ -11,7 +11,7 @@
 #
 # To change the exposed port, change the number on the left
 #
-# Data is stored in Docker "olumes, which by default would be
+# Data is stored in Docker volumes, which by default would be
 # managed by Docker, e.g. created within /var/lib/docker
 # with a UUID.
 #
