@@ -117,7 +117,7 @@ and data. Check on the docker host:
     sudo df -h /var/lib/docker/
 
 If you do not have enough space on the right permission, you might want
-to edit the `-volumes` sections in `docker-compose.yml` to use alternative
+to edit the `-volumes` sections in `docker-compose-override.yml` to use alternative
 folders for the most disk hungry containers. Note that you still need
 about 15 GB of disk space in `/var/lib/docker` for the
 downloaded Docker images.
@@ -141,13 +141,14 @@ It is **not recommended** to use an externally mounted volume
 Download this `ops-platform-setup` repository from the `master` branch:
 
     curl -L https://github.com/openphacts/ops-docker/archive/master.tar.gz | tar xzv
-    cd ops-docker
+    cd ops-docker-master
 
 You can also use the above to upgrade the `ops-docker` download, but this would
-overwrite any changes you have made to `docker-compose.yml`.
+overwrite any changes you have made to `docker-compose.yml`. Therefore
+you should put your edits in `docker-compose.override.yml` instead.
 
 Now make sure you are in the equivalent of the
-`ops-docker` folder and run:
+`ops-docker-master` folder and run:
 
     sudo docker-compose pull
 
@@ -174,7 +175,7 @@ data containers and their data staging counterpaths,
 [mysqlstaging](mysqlstaging), which will download
 the [Open PHACTS 1.5 data](http://data.openphacts.org/1.5/).
 
-If you do not have sufficient disk space in your
+Make sure you have [sufficient disk space available for Docker](#disk-space-for-docker).
 
 The below will download about ~20 GB and might take some
 time to download and stage
