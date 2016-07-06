@@ -6,12 +6,13 @@
 # with any customizations. Thus you should not need
 # to modify docker-compose.yml directly.
 
-# Uncomment settings below you want to customize:
+# Uncomment "services:" and 
+# the relevant sections below
 
-# NOTE: Be careful to preserve indentation!
+# NOTE: Be careful to preserve indentation
 
 version: '2'
-services:
+#services:
     #explorer:
     #  environment:
         # CHANGE: "localhost" to fully qualified hostname
