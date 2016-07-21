@@ -1,16 +1,14 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 # Where to download from
 ENV BASE https://data.openphacts.org/free/2.0/rdf/
 # Non-commercial users might instead use
 #ENV BASE https://data.openphacts.org/non-free/2.0/rdf/
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget axel
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget aria2
 
 RUN mkdir /download
 WORKDIR /download
-# Get *.sha1 first
-RUN wget -e robots=off --no-verbose --recursive --no-directories -A "*.tar*sha1" --no-parent $BASE
 COPY download.sh /usr/local/bin/
 
 VOLUME /download
