@@ -161,3 +161,7 @@ services:
   #ops-search:
   # container_name: ops-search
   # image: openphacts/ops-search
+
+  ## Future data
+  
+  # For Open PHACTS version 2.1: include Sure ChEMBL and additional Wikipathways data.
