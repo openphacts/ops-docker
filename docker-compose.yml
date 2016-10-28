@@ -116,11 +116,11 @@ services:
       - mysql
   #
   # Populate RDF from virtuoso backup download
-  virtuosostaging:
-    container_name: ops-virtuosostaging
-    build: virtuosodata-frombackup
-    volumes_from:
-      - virtuosodata
+  # virtuosostaging:
+  #   container_name: ops-virtuosostaging
+  #   build: virtuosodata-frombackup
+  #   volumes_from:
+  #     - virtuosodata
   #
   # To customize RDF dataloading, comment OUT the above 'virtuosostaging' block,
   # uncomment the below block, and then run
