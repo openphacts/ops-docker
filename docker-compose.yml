@@ -110,8 +110,8 @@ services:
   
   mysqlstaging:
     container_name: ops-mysqlstaging
-    #build: mysqlstaging
-    image: openphacts/identitymappingservice-staging
+    build: mysqlstaging
+    #image: openphacts/identitymappingservice-staging
     links:
       - mysql
   #
