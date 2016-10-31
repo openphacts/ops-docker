@@ -72,15 +72,22 @@ services:
   #     - /virtuoso
   #   container_name: ops-virtuosodata
   
-  mysqldata:
-    container_name: ops-mysqldata
-    image: busybox
-    volumes:
-      # To specify alternative data folder, use instead:
-      # - /media/big-SSD/mysql:/var/lib/mysql
-      - /var/lib/mysql
+  # ims:
+  #   container_name: ops-ims
+  #   image: openphacts/identitymappingservice
+  #   ports:
+  #     - "3004:8080"
+  #   links:
+  #     - mysql
+  #   #restart: always
   
-  
+  mysqlstaging:
+    container_name: ops-mysqlstaging
+    build: mysqlstaging
+    #image: openphacts/identitymappingservice-staging
+    links:
+      - mysql
+
   mysql:
     container_name: ops-mysql
     image: mysql:5.6
@@ -93,28 +100,20 @@ services:
       - MYSQL_PASSWORD=ims
       - MYSQL_HOST=127.0.0.1
     #restart: always
-  
-  # ims:
-  #   container_name: ops-ims
-  #   image: openphacts/identitymappingservice
-  #   ports:
-  #     - "3004:8080"
-  #   links:
-  #     - mysql
-  #   #restart: always
+
+  mysqldata:
+    container_name: ops-mysqldata
+    image: busybox
+    volumes:
+      # To specify alternative data folder, use instead:
+      # - /media/big-SSD/mysql:/var/lib/mysql
+      - /var/lib/mysql
   
   # memcached:
   #   container_name: ops-memcached
   #   image: memcached
   #   #restart: always
   
-  
-  mysqlstaging:
-    container_name: ops-mysqlstaging
-    build: mysqlstaging
-    #image: openphacts/identitymappingservice-staging
-    links:
-      - mysql
   #
   # Populate RDF from virtuoso backup download
   # virtuosostaging:
