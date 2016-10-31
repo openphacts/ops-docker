@@ -24,53 +24,53 @@
 
 version: '2'
 services:
-  explorer:
-    container_name: ops-explorer
-    image: openphacts/explorer2
-    ports:
-      - "3001:3000"
-    links:
-      - api
-    environment:
-      # CHANGE: "localhost" to fully qualified hostname
-      # Do NOT include a trailing /
-      - API_URL=http://localhost:3002
-    #restart: always
+  # explorer:
+  #   container_name: ops-explorer
+  #   image: openphacts/explorer2
+  #   ports:
+  #     - "3001:3000"
+  #   links:
+  #     - api
+  #   environment:
+  #     # CHANGE: "localhost" to fully qualified hostname
+  #     # Do NOT include a trailing /
+  #     - API_URL=http://localhost:3002
+  #   #restart: always
   
-  api:
-    container_name: ops-api
-    image: openphacts/ops-linkeddataapi
-    ports:
-      # Remember to match port in API_URL below
-      - "3002:80"
-    links:
-      - ims
-      - memcached
-      - virtuoso:sparql
-    #environment:
-    #  - CRS=https://ops.rsc.org/api/v1/
-    #  - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
-    #restart: always
+  # api:
+  #   container_name: ops-api
+  #   image: openphacts/ops-linkeddataapi
+  #   ports:
+  #     # Remember to match port in API_URL below
+  #     - "3002:80"
+  #   links:
+  #     - ims
+  #     - memcached
+  #     - virtuoso:sparql
+  #   #environment:
+  #   #  - CRS=https://ops.rsc.org/api/v1/
+  #   #  - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
+  #   #restart: always
   
-  # SPARQL server
-  virtuoso:
-    container_name: ops-virtuoso
-    #image: stain/virtuoso
-    build: virtuoso-ops
-    ports:
-      - "3003:8890"
-    volumes_from:
-      - virtuosodata
-    #restart: always
+  # # SPARQL server
+  # virtuoso:
+  #   container_name: ops-virtuoso
+  #   #image: stain/virtuoso
+  #   build: virtuoso-ops
+  #   ports:
+  #     - "3003:8890"
+  #   volumes_from:
+  #     - virtuosodata
+  #   #restart: always
   
-  virtuosodata:
-    container_name: ops-virtuosodata
-    image: busybox
-    volumes:
-      # To specify alternative data folder, use instad:
-      # - /media/big-SSD/virtuoso:/virtuoso
-      - /virtuoso
-    container_name: ops-virtuosodata
+  # virtuosodata:
+  #   container_name: ops-virtuosodata
+  #   image: busybox
+  #   volumes:
+  #     # To specify alternative data folder, use instad:
+  #     # - /media/big-SSD/virtuoso:/virtuoso
+  #     - /virtuoso
+  #   container_name: ops-virtuosodata
   
   mysqldata:
     container_name: ops-mysqldata
@@ -91,21 +91,22 @@ services:
       - MYSQL_DATABASE=ims
       - MYSQL_USER=ims
       - MYSQL_PASSWORD=ims
+      - MYSQL_HOST=127.0.0.1
     #restart: always
   
-  ims:
-    container_name: ops-ims
-    image: openphacts/identitymappingservice
-    ports:
-      - "3004:8080"
-    links:
-      - mysql
-    #restart: always
+  # ims:
+  #   container_name: ops-ims
+  #   image: openphacts/identitymappingservice
+  #   ports:
+  #     - "3004:8080"
+  #   links:
+  #     - mysql
+  #   #restart: always
   
-  memcached:
-    container_name: ops-memcached
-    image: memcached
-    #restart: always
+  # memcached:
+  #   container_name: ops-memcached
+  #   image: memcached
+  #   #restart: always
   
   
   mysqlstaging:
