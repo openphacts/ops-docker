@@ -96,11 +96,11 @@ services:
     ports:
       - 3306:3306
     environment:
+      # - MYSQL_HOST=127.0.0.1
+      # - MYSQL_DATABASE=ims
+      # - MYSQL_USER=ims
+      # - MYSQL_PASSWORD=ims
       - MYSQL_ROOT_PASSWORD=uCie0ahgah
-      - MYSQL_DATABASE=ims
-      - MYSQL_USER=ims
-      - MYSQL_PASSWORD=ims
-      - MYSQL_HOST=127.0.0.1
     #restart: always
 
   mysqldata:
