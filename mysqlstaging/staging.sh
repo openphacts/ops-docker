@@ -37,10 +37,15 @@ fi
 
 # To avoid password warnings..
 echo "[client]" > /tmp/my.conf
-echo "host=$MYSQL_PORT_3306_TCP_ADDR" >> /tmp/my.conf
-echo "port=$MYSQL_PORT_3306_TCP_PORT" >> /tmp/my.conf
+# echo "host=$MYSQL_PORT_3306_TCP_ADDR" >> /tmp/my.conf
+echo "host=127.0.0.1" >> /tmp/my.conf
+echo "port=3306" >> /tmp/my.conf
+echo "database=ims" >> /tmp/my.conf
 echo "user=root" >> /tmp/my.conf
-echo "password=$MYSQL_ENV_MYSQL_ROOT_PASSWORD" >> /tmp/my.conf
+echo "password=uCie0ahgah" >> /tmp/my.conf
+
+echo "$ cat /tmp/my.conf"
+cat /tmp/my.conf
 
 # hope that mysql has started
 echo "Waiting for mySQL (up to $MYSQL_SLEEP seconds)"
@@ -48,8 +53,9 @@ wait
 echo "mySQL staging"
 ls -alh /tmp/staging.sql
 
-cat $sql | cpipe -vw -b 8192 | mysql --defaults-file=/tmp/my.conf
+cat $sql | cpipe -vw -b 8192 | mysql --defaults-file=/tmp/my.conf --protocol=TCP
 # Mark as staged
 mv staging/* staged/
 rm -f $sql
 echo "mySQL staging finished"
+
