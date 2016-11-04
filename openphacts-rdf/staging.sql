@@ -1,32 +1,32 @@
 -- Biggest ones first
 
 
--- Uniprot 
-ld_dir('/staging/uniprot' , '*.nq.gz' , 'http://purl.uniprot.org' );
+-- -- Uniprot 
+-- ld_dir('/staging/uniprot' , '*.nq.gz' , 'http://purl.uniprot.org' );
 
--- GOA
-ld_dir('/staging/GOA' , '*.nq.gz' , 'http://www.openphacts.org/goa' );
+-- -- GOA
+-- ld_dir('/staging/GOA' , '*.nq.gz' , 'http://www.openphacts.org/goa' );
 
--- ChEMBL v20
-ld_dir('/staging/chembl20', '*.nq.gz', 'http://www.ebi.ac.uk/chembl');
+-- -- ChEMBL v20
+-- ld_dir('/staging/chembl20', '*.nq.gz', 'http://www.ebi.ac.uk/chembl');
 
--- Nextprot
-ld_dir('/staging/nx_np', '*.nq.gz', 'http://www.nextprot.org');
+-- -- Nextprot
+-- ld_dir('/staging/nx_np', '*.nq.gz', 'http://www.nextprot.org');
 
--- Open PHACTS Chemical Registry
+-- -- Open PHACTS Chemical Registry
 
-ld_dir('/staging/OCRS/20131111/CHEMBL' , 'PROPERTIES_CHEMBL20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/CHEMBL' , 'SYNONYMS_CHEMBL20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/CHEMBL' , 'LINKSET_EXACT_CHEMBL20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/CHEBI' , 'PROPERTIES_CHEBI20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/CHEBI' , 'SYNONYMS_CHEBI20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/CHEBI' , 'LINKSET_EXACT_CHEBI20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/DRUGBANK' , 'PROPERTIES_DRUGBANK20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/DRUGBANK' , 'LINKSET_EXACT_DRUGBANK20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/PDB' , 'PROPERTIES_PDB20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/PDB' , 'SYNONYMS_PDB20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/MESH' , 'PROPERTIES_MESH20131111.nq.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/OCRS/20131111/MESH' , 'SYNONYMS_MESH20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/CHEMBL' , 'PROPERTIES_CHEMBL20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/CHEMBL' , 'SYNONYMS_CHEMBL20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/CHEMBL' , 'LINKSET_EXACT_CHEMBL20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/CHEBI' , 'PROPERTIES_CHEBI20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/CHEBI' , 'SYNONYMS_CHEBI20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/CHEBI' , 'LINKSET_EXACT_CHEBI20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/DRUGBANK' , 'PROPERTIES_DRUGBANK20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/DRUGBANK' , 'LINKSET_EXACT_DRUGBANK20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/PDB' , 'PROPERTIES_PDB20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/PDB' , 'SYNONYMS_PDB20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/MESH' , 'PROPERTIES_MESH20131111.nq.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/OCRS/20131111/MESH' , 'SYNONYMS_MESH20131111.nq.gz' , 'http://ops.rsc.org' );
 
 -- and then the rest
 
