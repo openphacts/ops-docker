@@ -2,7 +2,7 @@
 set -e
 
 # Inherited from Dockerfile
-#BASE=http://data.openphacts.org/free/2.0/rdf/
+#BASE=http://data.openphacts.org/free/2.1/rdf/
 cd /download
 
 if [ -f .downloaded ] ; then 
