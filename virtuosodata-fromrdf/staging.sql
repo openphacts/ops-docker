@@ -69,7 +69,4 @@ ld_dir('/staging/WP/WPREACTRDF' , '*.nq.gz' , 'http://www.wikipathways.org' );
 ld_dir('/staging/WP/OPSWPRDF' , '*.nq.gz' , 'http://www.wikipathways.org' );
 
 
-
-
-
-
+rdf_loader_run();

@@ -12,13 +12,9 @@ WORKDIR /download
 COPY download.sh /usr/local/bin/
 
 VOLUME /download
-# Expose for linking
-VOLUME /staging 
 
 #RUN /download/download.sh
 
-RUN mkdir -p /staging
 COPY staging.sql /staging/
-
 CMD ["/usr/local/bin/download.sh"]
 
