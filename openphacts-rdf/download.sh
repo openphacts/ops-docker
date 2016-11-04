@@ -42,8 +42,8 @@ if [ -f /tmp/urls ] ; then
 fi
 
 
-echo "Verifying checksums"
-sha1sum -c *sha1
+# echo "Verifying checksums"
+# sha1sum -c *sha1
 
 
 echo "Extracting to /staging"
