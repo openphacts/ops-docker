@@ -93,6 +93,8 @@ services:
     image: mysql:5.7
     volumes_from:
       - mysqldata
+    ports:
+      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=uCie0ahgah
       - MYSQL_DATABASE=ims
