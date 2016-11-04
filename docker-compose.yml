@@ -81,12 +81,34 @@ services:
   #     - mysql
   #   #restart: always
   
-  mysqlstaging:
-    container_name: ops-mysqlstaging
-    build: mysqlstaging
-    #image: openphacts/identitymappingservice-staging
+  # mysqlstaging:
+  #   container_name: ops-mysqlstaging
+  #   build: mysqlstaging
+  #   #image: openphacts/identitymappingservice-staging
+  #   links:
+  #     - mysql
+  
+  mysqltest:
+    container_name: ops-mysqltest
+    build: mysqltest
     links:
       - mysql
+    volumes:
+      - /Users/rk/w/ops/test:/test
+    environment:
+      - MYSQL_HOST=172.17.0.2
+      # - MYSQL_HOST=mysql
+      # - MYSQL_DATABASE=ims
+      # - MYSQL_USER=ims
+      # - MYSQL_PASSWORD=ims
+      - MYSQL_ROOT_PASSWORD=uCie0ahgah
+    # volumes_from:
+    #   - mysqlfile
+
+  # mysqlfile:
+  #   container_name: ops-mysqlfile
+  #   volumes:
+  #     - /Users/rk/w/ops/test:/test
 
   mysql:
     container_name: ops-mysql
