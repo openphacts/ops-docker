@@ -1,6 +1,6 @@
 FROM stain/virtuoso
 
-ADD load.sh /usr/local/bin/
+COPY load.sh /usr/local/bin/
 
 COPY staging.sql /staging/
 

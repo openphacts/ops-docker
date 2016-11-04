@@ -9,7 +9,8 @@ fi
 
 echo Loading RDF from /staging
 tail -F /virtuoso/virtuoso.log &
-staging.sh
+# staging.sh
+isql 1111 dba dba /staging/staging.sql
 rm /staging/*
 touch /staging/.staged
 echo Loading finished
