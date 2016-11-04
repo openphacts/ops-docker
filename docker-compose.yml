@@ -52,25 +52,61 @@ services:
   #   #  - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
   #   #restart: always
   
-  # # SPARQL server
-  # virtuoso:
-  #   container_name: ops-virtuoso
-  #   #image: stain/virtuoso
-  #   build: virtuoso-ops
-  #   ports:
-  #     - "3003:8890"
+  # SPARQL server
+  virtuoso:
+    container_name: ops-virtuoso
+    #image: stain/virtuoso
+    build: virtuoso-ops
+    ports:
+      - "3003:8890"
+    volumes_from:
+      - virtuosodata
+    #restart: always
+  
+  virtuosodata:
+    container_name: ops-virtuosodata
+    image: busybox
+    volumes:
+      # To specify alternative data folder, use instead:
+      # - /media/big-SSD/virtuoso:/virtuoso
+      - /media/tyree/ops/virtuoso:/virtuoso
+      # - /virtuoso
+    container_name: ops-virtuosodata
+  
+  #
+  # Populate RDF from virtuoso backup download
+  # virtuosostaging:
+  #   container_name: ops-virtuosostaging
+  #   build: virtuosodata-frombackup
   #   volumes_from:
   #     - virtuosodata
-  #   #restart: always
+  #
+  # To customize RDF dataloading, comment OUT the above 'virtuosostaging' block,
+  # uncomment the below block, and then run
+  # docker-compose up -d virtuosostagingrdf
+  #
+  ## BEGIN custom loading
   
-  # virtuosodata:
-  #   container_name: ops-virtuosodata
-  #   image: busybox
-  #   volumes:
-  #     # To specify alternative data folder, use instad:
-  #     # - /media/big-SSD/virtuoso:/virtuoso
-  #     - /virtuoso
-  #   container_name: ops-virtuosodata
+  ### Load into virtuoso
+  virtuosostagingrdf:
+    container_name: ops-virtuosostagingrdf
+    build: virtuosodata-fromrdf
+    volumes_from:
+     - virtuosodata
+     - openphactsrdf
+  
+  ### Download from data.openphacts.org
+  openphactsrdf:
+    container_name: ops-openphactsrdf
+    build: openphacts-rdf
+    volumes:
+      # - /download
+      # - /staging
+      # To specify alternative data folder, use instad:
+      # - /media/big-SSD/download:/download
+      # - /media/big-SSD/staging:/staging
+      - /media/tyree/ops/rdf/download:/download
+      - /media/tyree/ops/rdf/staging:/staging
   
   # ims:
   #   container_name: ops-ims
@@ -88,89 +124,56 @@ services:
   #   links:
   #     - mysql
   
-  mysqltest:
-    container_name: ops-mysqltest
-    build: mysqltest
-    links:
-      - mysql
-    volumes:
-      - /Users/rk/w/ops/test:/test
-    environment:
-      - MYSQL_HOST=172.17.0.2
-      # - MYSQL_HOST=mysql
-      # - MYSQL_DATABASE=ims
-      # - MYSQL_USER=ims
-      # - MYSQL_PASSWORD=ims
-      - MYSQL_ROOT_PASSWORD=uCie0ahgah
-    # volumes_from:
-    #   - mysqlfile
+  # mysqltest:
+  #   container_name: ops-mysqltest
+  #   build: mysqltest
+  #   links:
+  #     - mysql
+  #   volumes:
+  #     - /Users/rk/w/ops/test:/test
+  #   environment:
+  #     - MYSQL_HOST=172.17.0.2
+  #     # - MYSQL_HOST=mysql
+  #     # - MYSQL_DATABASE=ims
+  #     # - MYSQL_USER=ims
+  #     # - MYSQL_PASSWORD=ims
+  #     - MYSQL_ROOT_PASSWORD=uCie0ahgah
+  #   # volumes_from:
+  #   #   - mysqlfile
 
   # mysqlfile:
   #   container_name: ops-mysqlfile
   #   volumes:
   #     - /Users/rk/w/ops/test:/test
 
-  mysql:
-    container_name: ops-mysql
-    image: mysql:5.7
-    volumes_from:
-      - mysqldata
-    ports:
-      - 3306:3306
-    environment:
-      # - MYSQL_HOST=127.0.0.1
-      # - MYSQL_DATABASE=ims
-      # - MYSQL_USER=ims
-      # - MYSQL_PASSWORD=ims
-      - MYSQL_ROOT_PASSWORD=uCie0ahgah
-    #restart: always
+  # mysql:
+  #   container_name: ops-mysql
+  #   image: mysql:5.7
+  #   volumes_from:
+  #     - mysqldata
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     # - MYSQL_HOST=127.0.0.1
+  #     # - MYSQL_DATABASE=ims
+  #     # - MYSQL_USER=ims
+  #     # - MYSQL_PASSWORD=ims
+  #     - MYSQL_ROOT_PASSWORD=uCie0ahgah
+  #   #restart: always
 
-  mysqldata:
-    container_name: ops-mysqldata
-    image: busybox
-    volumes:
-      # To specify alternative data folder, use instead:
-      # - /media/big-SSD/mysql:/var/lib/mysql
-      - /var/lib/mysql
+  # mysqldata:
+  #   container_name: ops-mysqldata
+  #   image: busybox
+  #   volumes:
+  #     # To specify alternative data folder, use instead:
+  #     # - /media/big-SSD/mysql:/var/lib/mysql
+  #     # - /var/lib/mysql
+  #     - /media/tyree/ops/mysql
   
   # memcached:
   #   container_name: ops-memcached
   #   image: memcached
   #   #restart: always
-  
-  #
-  # Populate RDF from virtuoso backup download
-  # virtuosostaging:
-  #   container_name: ops-virtuosostaging
-  #   build: virtuosodata-frombackup
-  #   volumes_from:
-  #     - virtuosodata
-  #
-  # To customize RDF dataloading, comment OUT the above 'virtuosostaging' block,
-  # uncomment the below block, and then run
-  # docker-compose up -d virtuosostagingrdf
-  #
-  ## BEGIN custom loading
-  
-  ### Download from data.openphacts.org
-  #openphactsrdf:
-  #  container_name: ops-openphactsrdf
-  #  build: openphacts-rdf
-  #  volumes:
-  #    # To specify alternative data folder, use instad:
-  #    # - /media/big-SSD/download:/download
-  #    # - /media/big-SSD/staging:/staging
-  #    - /download
-  #    - /staging
-  #    # /download
-  #
-  ### Load into virtuoso
-  #virtuosostagingrdf:
-  #  container_name: ops-virtuosostagingrdf
-  #  build: virtuosodata-fromrdf
-  #  volumes_from:
-  #    - virtuosodata
-  #    - openphactsrdf
   
   ### END custom loading
   
