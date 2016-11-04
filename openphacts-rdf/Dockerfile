@@ -15,6 +15,5 @@ VOLUME /download
 
 #RUN /download/download.sh
 
-COPY staging.sql /staging/
 CMD ["/usr/local/bin/download.sh"]
 
