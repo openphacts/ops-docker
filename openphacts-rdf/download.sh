@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 # Inherited from Dockerfile
 #BASE=http://data.openphacts.org/free/2.1/rdf/
