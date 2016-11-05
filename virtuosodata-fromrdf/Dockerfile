@@ -5,7 +5,5 @@ RUN chmod 755 /usr/local/bin/load.sh
 
 COPY staging.sql /staging/
 
-RUN chmod 755 /usr/local/bin/load.sh
-
-CMD ["/usr/local/bin/load.sh"]
+RUN /usr/local/bin/load.sh
 
