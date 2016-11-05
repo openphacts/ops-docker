@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM stain/virtuoso
 
 # Where to download from
 ENV BASE https://data.openphacts.org/free/2.1/rdf/
