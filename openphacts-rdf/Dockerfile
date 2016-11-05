@@ -11,14 +11,14 @@ RUN mkdir /download
 WORKDIR /download
 COPY download.sh /usr/local/bin/
 
-VOLUME /download
-# Expose for linking
-VOLUME /staging
 
 #RUN /download/download.sh
 
 RUN mkdir -p /staging
 RUN /usr/local/bin/download.sh
+
+VOLUME /download
+VOLUME /staging
 
 CMD ls -al /download /staging
 
