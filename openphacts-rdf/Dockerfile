@@ -18,6 +18,7 @@ VOLUME /staging
 #RUN /download/download.sh
 
 RUN mkdir -p /staging
+RUN /usr/local/bin/download.sh
 
-CMD ["/usr/local/bin/download.sh"]
+CMD ls -al /download /staging
 
