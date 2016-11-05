@@ -9,6 +9,10 @@ fi
 
 echo Loading RDF from /staging
 tail -F /virtuoso/virtuoso.log &
+echo 'ls -ld /usr/local/bin/isql'
+ls -ld /usr/local/bin/isql
+echo 'ls -al /staging'
+ls -al /staging
 staging.sh
 # isql 1111 dba dba /staging/staging.sql
 # rm /staging/*
