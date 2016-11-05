@@ -7,14 +7,24 @@ if [ -f /staging/.staged ] ; then
   exit 0
 fi
 
-echo Loading RDF from /staging
+echo 'Loading RDF from /staging'
 tail -F /virtuoso/virtuoso.log &
-echo 'ls -ld /usr/local/bin/isql'
-ls -ld /usr/local/bin/isql
+
 echo 'ls -al /staging'
 ls -al /staging
+
+echo 'ls -ld /usr/local/bin/isql'
+ls -ld /usr/local/bin/isql
+
+echo 'ls -ld /usr/local/bin/staging.sh'
+ls -ld /usr/local/bin/staging.sh
+which staging.sh
+
 staging.sh
+
 # isql 1111 dba dba /staging/staging.sql
 # rm /staging/*
+
 touch /staging/.staged
-echo Loading finished
+
+echo 'Loading finished'
