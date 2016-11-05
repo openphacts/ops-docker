@@ -7,14 +7,14 @@ ENV BASE https://data.openphacts.org/free/2.1/rdf/
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget aria2
 
-RUN mkdir /download
-WORKDIR /download
 COPY download.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/download.sh
 
-
-#RUN /download/download.sh
-
+RUN mkdir -p /download
 RUN mkdir -p /staging
+
+WORKDIR /download
+
 RUN /usr/local/bin/download.sh
 
 VOLUME /download
