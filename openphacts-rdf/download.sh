@@ -45,16 +45,5 @@ fi
 # echo "Verifying checksums"
 # sha1sum -c *sha1
 
-
-echo "Extracting to /staging"
-mkdir -p /staging
-cd /staging
-for x in /download/*tar ; do 
-  echo Extracting from $x
-  tar xfv $x 
-  # Delete extracted tar file so it won't be downloaded+extracted again
-  rm -f $x $x.sha1
-done
 touch .downloaded
 echo "Data download complete"
-

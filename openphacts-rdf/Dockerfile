@@ -11,14 +11,12 @@ COPY download.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/download.sh
 
 RUN mkdir -p /download
-RUN mkdir -p /staging
 
 WORKDIR /download
 
 RUN /usr/local/bin/download.sh
 
 VOLUME /download
-VOLUME /staging
 
-CMD ls -al /download /staging
+CMD ls -al /download
 
