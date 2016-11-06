@@ -95,6 +95,9 @@ services:
     volumes_from:
      - virtuosodata
      - openphactsrdf
+    volumes:
+      - /media/tyree/ops/rdf/staging/:/staging/
+
   
   ### Download from data.openphacts.org
   openphactsrdf:
@@ -106,8 +109,7 @@ services:
       # To specify alternative data folder, use instad:
       # - /media/big-SSD/download:/download
       # - /media/big-SSD/staging:/staging
-      - /media/tyree/ops/rdf/download:/download
-      - /media/tyree/ops/rdf/staging:/staging
+      - /media/tyree/ops/rdf/download/:/download/
   
   # ims:
   #   container_name: ops-ims
