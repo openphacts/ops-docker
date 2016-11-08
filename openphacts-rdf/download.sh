@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
-set -x
 
-# Inherited from Dockerfile
-#BASE=http://data.openphacts.org/free/2.1/rdf/
-cd /download
+## Inherited from Dockerfile, e.g.:
+## URL_DATA_FREE=http://data.openphacts.org/free/2.1/rdf/
+## URL_DATA_NONFREE=http://data.openphacts.org/non-free/2.1/rdf/
 
 if [ -f .downloaded ] ; then 
   echo "Already downloaded, nothing more to do."
@@ -31,6 +30,9 @@ for sha in $shas; do
     url="${BASE}${file}"
     echo $url >> /tmp/urls
   fi
+wget -e robots=off --no-verbose --recursive --no-directories -A '*.*' --no-parent ${URL_DATA_FREE}
+wget -e robots=off --no-verbose --recursive --no-directories -A '*.*' --no-parent \
+     --user=${USER_NONFREE} --password=${PASSWORD_NONFREE} ${URL_DATA_NONFREE}
 done
 
 
