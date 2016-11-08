@@ -4,8 +4,6 @@ ENV OPS_VERSION 2.1
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget aria2
 
-COPY download.sh /usr/local/bin/
-RUN chmod 755 /usr/local/bin/download.sh
 ## Where to download from
 ##
 ## free
@@ -16,12 +14,20 @@ ENV USER_NONFREE randy
 ENV PASSWORD_NONFREE AP9fXcg93HTXrZGWNfP5A2HWGNz
 
 RUN mkdir -p /download
-
 WORKDIR /download
+COPY download.sh /usr/local/bin/
 
-RUN /usr/local/bin/download.sh
+# RUN chmod 755 /usr/local/bin/download.sh
+# RUN /usr/local/bin/download.sh
 
-VOLUME /download
+RUN mkdir -p /staging
+COPY staging.sql /staging/
+COPY triple-count.rq /staging/
 
-CMD ls -al /download
+RUN ["/usr/local/bin/download.sh"]
+
+VOLUME /download/
+VOLUME /staging/
+
+# CMD ls -al /staging/
 
