@@ -31,42 +31,42 @@
 -- and then the rest
 
 
--- FDA Adverse Events
-ld_dir('/staging/aers' , '*.nq.gz', 'http://aers.data2semantics.org/');
+-- -- FDA Adverse Events
+-- ld_dir('/staging/aers' , '*.nq.gz', 'http://aers.data2semantics.org/');
 
 -- Caloha
-ld_dir('/staging/caloha', '*.nq.gz', 'http://www.nextprot.org/caloha');
+ld_dir('/staging/caloha/data', '*.ttl.gz', 'http://www.nextprot.org/caloha');
 
--- ChEBI
-ld_dir('/staging/chebi' , '*.nq.gz' , 'http://www.ebi.ac.uk/chebi' );
-
-
--- ConceptWiki
-ld_dir('/staging/CW' , '*.nq.gz' , 'http://www.conceptwiki.org' );
-
--- DisGeneT
-ld_dir('/staging/disgenet', '*.nq.gz', 'http://rdf.imim.es');
-
--- DrugBank v4.1
-ld_dir('/staging/drugbank' , '*.nq.gz' , 'http://www.openphacts.org/bio2rdf/drugbank');
-
--- Enzyme
-ld_dir('/staging/enzyme' , '*.nq.gz' , 'http://purl.uniprot.org/enzyme' );
-
--- Gene Ontology
-ld_dir('/staging/GO' , '*.nq.gz' , 'http://www.geneontology.org' );
+-- -- ChEBI
+-- ld_dir('/staging/chebi' , '*.nq.gz' , 'http://www.ebi.ac.uk/chebi' );
 
 
+-- -- ConceptWiki
+-- ld_dir('/staging/CW' , '*.nq.gz' , 'http://www.conceptwiki.org' );
+
+-- -- DisGeneT
+-- ld_dir('/staging/disgenet', '*.nq.gz', 'http://rdf.imim.es');
+
+-- -- DrugBank v4.1
+-- ld_dir('/staging/drugbank' , '*.nq.gz' , 'http://www.openphacts.org/bio2rdf/drugbank');
+
+-- -- Enzyme
+-- ld_dir('/staging/enzyme' , '*.nq.gz' , 'http://purl.uniprot.org/enzyme' );
+
+-- -- Gene Ontology
+-- ld_dir('/staging/GO' , '*.nq.gz' , 'http://www.geneontology.org' );
 
 
 
--- VoID Dataset Descriptors
-ld_dir('/staging/void' , '*.nq.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
 
--- WikiPathways
-ld_dir('/staging/WP' , '*.nq.gz' , 'http://www.wikipathways.org' );
-ld_dir('/staging/WP/WPREACTRDF' , '*.nq.gz' , 'http://www.wikipathways.org' );
-ld_dir('/staging/WP/OPSWPRDF' , '*.nq.gz' , 'http://www.wikipathways.org' );
+
+-- -- VoID Dataset Descriptors
+-- ld_dir('/staging/void' , '*.nq.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
+
+-- -- WikiPathways
+-- ld_dir('/staging/WP' , '*.nq.gz' , 'http://www.wikipathways.org' );
+-- ld_dir('/staging/WP/WPREACTRDF' , '*.nq.gz' , 'http://www.wikipathways.org' );
+-- ld_dir('/staging/WP/OPSWPRDF' , '*.nq.gz' , 'http://www.wikipathways.org' );
 
 
 rdf_loader_run();
