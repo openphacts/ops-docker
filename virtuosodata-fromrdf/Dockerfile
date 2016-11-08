@@ -1,5 +1,4 @@
-# FROM stain/virtuoso
-FROM aeed2d3b95a9
+FROM stain/virtuoso
 
 COPY load.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/load.sh
