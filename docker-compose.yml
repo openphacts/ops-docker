@@ -70,9 +70,8 @@ services:
     volumes:
       # To specify alternative data folder, use instead:
       # - /media/big-SSD/virtuoso:/virtuoso
-      - /media/tyree/ops/virtuoso:/virtuoso
-      # - /virtuoso
-    container_name: ops-virtuosodata
+      # - /media/tyree/ops/virtuoso:/virtuoso
+      - /virtuoso
   
   #
   # Populate RDF from virtuoso backup download
@@ -104,12 +103,12 @@ services:
     container_name: ops-openphactsrdf
     build: openphacts-rdf
     volumes:
-      # - /download
-      # - /staging
-      # To specify alternative data folder, use instad:
+      - /download
+      - /staging
+      # To specify alternative data folder, use insetad:
       # - /media/big-SSD/download:/download
       # - /media/big-SSD/staging:/staging
-      - /media/tyree/ops/rdf/download/:/download/
+      # - /media/tyree/ops/rdf/download/:/download/
   
   # ims:
   #   container_name: ops-ims
