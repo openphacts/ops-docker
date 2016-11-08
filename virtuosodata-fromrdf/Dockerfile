@@ -2,6 +2,8 @@ FROM stain/virtuoso
 
 COPY load.sh /usr/local/bin/
 
+COPY staging.sql /staging/
+
 # CMD ["/usr/local/bin/load.sh"]
 CMD ["/usr/local/bin/staging.sh"]
 
