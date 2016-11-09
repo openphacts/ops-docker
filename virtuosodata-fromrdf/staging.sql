@@ -9,18 +9,18 @@
 -- uniprot
 -- nextprot
 
--- -- Uniprot 
--- ld_dir('/staging/uniprot/data' , '*.rdf.xml.gz' , 'http://purl.uniprot.org' );
--- ld_dir('/staging/uniprot/data' , '*.ttl.gz' , 'http://purl.uniprot.org' );
+-- Uniprot 
+ld_dir('/staging/uniprot/data' , '*.rdf.xml.gz' , 'http://purl.uniprot.org' );
+ld_dir('/staging/uniprot/data' , '*.ttl.gz' , 'http://purl.uniprot.org' );
 
--- -- GOA
--- ld_dir('/staging/goa/data' , '*.rdf.gz' , 'http://www.openphacts.org/goa' );
+-- GOA
+ld_dir('/staging/goa/data' , '*.rdf.gz' , 'http://www.openphacts.org/goa' );
 
--- -- ChEMBL v20
--- ld_dir('/staging/chembl/data', '*.ttl.gz', 'http://www.ebi.ac.uk/chembl');
+-- ChEMBL v20
+ld_dir('/staging/chembl/data', '*.ttl.gz', 'http://www.ebi.ac.uk/chembl');
 
--- -- Nextprot
--- ld_dir('/staging/nextprot/data', '*.nq.gz', 'http://www.nextprot.org');
+-- Nextprot
+ld_dir('/staging/nextprot/data', '*.nq.gz', 'http://www.nextprot.org');
 
 -- -- Open PHACTS Chemical Registry
 
@@ -35,8 +35,8 @@
 -- and then the rest
 
 
--- FDA Adverse Events
-ld_dir('/staging/aers/data' , '*.nt.gz', 'http://aers.data2semantics.org/');
+-- -- FDA Adverse Events
+-- ld_dir('/staging/aers/data' , '*.nt.gz', 'http://aers.data2semantics.org/');
 
 -- DONE
 -- -- Caloha
@@ -52,14 +52,14 @@ ld_dir('/staging/aers/data' , '*.nt.gz', 'http://aers.data2semantics.org/');
 -- -- DisGeneT
 -- ld_dir('/staging/disgenet/data', '*.ttl.gz', 'http://rdf.imim.es');
 
--- DrugBank v4.1
-ld_dir('/staging/drugbank/data' , '*.nt.gz' , 'http://www.openphacts.org/bio2rdf/drugbank');
+-- -- DrugBank v4.1
+-- ld_dir('/staging/drugbank/data' , '*.nt.gz' , 'http://www.openphacts.org/bio2rdf/drugbank');
 
--- Enzyme
-ld_dir('/staging/enzyme/data' , '*.rdf.gz' , 'http://purl.uniprot.org/enzyme' );
+-- -- Enzyme
+-- ld_dir('/staging/enzyme/data' , '*.rdf.gz' , 'http://purl.uniprot.org/enzyme' );
 
--- Gene Ontology
-ld_dir('/staging/go/data' , '*.owl.gz' , 'http://www.geneontology.org' );
+-- -- Gene Ontology
+-- ld_dir('/staging/go/data' , '*.owl.gz' , 'http://www.geneontology.org' );
 
 
 
