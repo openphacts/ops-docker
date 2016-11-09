@@ -1,26 +1,41 @@
 -- Biggest ones first
 
--- MISSING:
+-- ToDo (MISSING):
 --   surechembl
 --   BAO
 --   NCATS
 
--- ToDo
--- uniprot
--- nextprot
+-- BAO
+ld_dir('/staging/bao/data' , '*.gz' , 'http://www.bioassayontology.org' );
 
--- Uniprot 
-ld_dir('/staging/uniprot/data' , '*.rdf.xml.gz' , 'http://purl.uniprot.org' );
-ld_dir('/staging/uniprot/data' , '*.ttl.gz' , 'http://purl.uniprot.org' );
 
--- GOA
-ld_dir('/staging/goa/data' , '*.rdf.gz' , 'http://www.openphacts.org/goa' );
+-- NCATS
 
--- ChEMBL v20
-ld_dir('/staging/chembl/data', '*.ttl.gz', 'http://www.ebi.ac.uk/chembl');
+-- in: <http://rdf.ncats.nih.gov/opddr>
+ld_dir('/staging/ncats/data' , 'npcpd2_assay.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
+ld_dir('/staging/ncats/data' , 'npcpd2_bao.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
+ld_dir('/staging/ncats/data' , 'npcpd2_substance.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
 
--- Nextprot
-ld_dir('/staging/nextprot/data', '*.nq.gz', 'http://www.nextprot.org');
+-- in: <http://rdf.ncats.nih.gov/opddr/pubchem>
+ld_dir('/staging/ncats/data' , 'pubchem_*.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr/pubchem' );
+
+
+-- surechembl
+ld_dir('/staging/surechembl/data' , '*.ttl.gz' , 'http://www.ebi.ac.uk/surechembl' );
+
+
+-- -- Uniprot 
+-- ld_dir('/staging/uniprot/data' , '*.rdf.xml.gz' , 'http://purl.uniprot.org' );
+-- ld_dir('/staging/uniprot/data' , '*.ttl.gz' , 'http://purl.uniprot.org' );
+
+-- -- GOA
+-- ld_dir('/staging/goa/data' , '*.rdf.gz' , 'http://www.openphacts.org/goa' );
+
+-- -- ChEMBL v20
+-- ld_dir('/staging/chembl/data', '*.ttl.gz', 'http://www.ebi.ac.uk/chembl');
+
+-- -- Nextprot
+-- ld_dir('/staging/nextprot/data', '*.nq.gz', 'http://www.nextprot.org');
 
 -- -- Open PHACTS Chemical Registry
 
