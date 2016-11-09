@@ -5,6 +5,9 @@
 --   BAO
 --   NCATS
 
+-- ToDo
+-- uniprot
+-- nextprot
 
 -- -- Uniprot 
 -- ld_dir('/staging/uniprot/data' , '*.rdf.xml.gz' , 'http://purl.uniprot.org' );
@@ -46,8 +49,8 @@
 -- -- ConceptWiki
 -- ld_dir('/staging/conceptwiki/data/' , '*.ttl.gz' , 'http://www.conceptwiki.org' );
 
--- -- DisGeneT
--- ld_dir('/staging/disgenet/data', '*.ttl.gz', 'http://rdf.imim.es');
+-- DisGeneT
+ld_dir('/staging/disgenet/data', '*.ttl.gz', 'http://rdf.imim.es');
 
 -- -- DrugBank v4.1
 -- ld_dir('/staging/drugbank/data' , '*.nt.gz' , 'http://www.openphacts.org/bio2rdf/drugbank');
@@ -60,12 +63,12 @@
 
 
 
--- -- doid
--- ld_dir('/staging/doid/data' , '*.owl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
+-- doid
+ld_dir('/staging/doid/data' , '*.owl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
 
 
--- -- VoID Dataset Descriptors
--- ld_dir('/staging/void/data' , '*.ttl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
+-- VoID Dataset Descriptors
+ld_dir('/staging/void/data' , '*.ttl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
 
 
 
