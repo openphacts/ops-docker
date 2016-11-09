@@ -15,12 +15,13 @@
 
 -- -- Open PHACTS Chemical Registry
 
-ld_dir('/staging/ocrs/data/CHEMBL' , '*.ttl.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/ocrs/data/CHEBI' , '*.ttl.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/ocrs/data/DRUGBANK' , '*.ttl.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/ocrs/data/PDB' , '*.ttl.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/ocrs/data/MESH' , '*.ttl.gz' , 'http://ops.rsc.org' );
-ld_dir('/staging/ocrs/data/HUMAN_METABOLOME_DATABASE' , '*.ttl.gz' , 'http://ops.rsc.org' );
+-- DONE
+-- ld_dir('/staging/ocrs/data/CHEMBL' , '*.ttl.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/ocrs/data/CHEBI' , '*.ttl.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/ocrs/data/DRUGBANK' , '*.ttl.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/ocrs/data/PDB' , '*.ttl.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/ocrs/data/MESH' , '*.ttl.gz' , 'http://ops.rsc.org' );
+-- ld_dir('/staging/ocrs/data/HUMAN_METABOLOME_DATABASE' , '*.ttl.gz' , 'http://ops.rsc.org' );
 
 -- and then the rest
 
@@ -28,12 +29,13 @@ ld_dir('/staging/ocrs/data/HUMAN_METABOLOME_DATABASE' , '*.ttl.gz' , 'http://ops
 -- -- FDA Adverse Events
 -- ld_dir('/staging/aers' , '*.nq.gz', 'http://aers.data2semantics.org/');
 
--- Caloha
-ld_dir('/staging/caloha/data', '*.ttl.gz', 'http://www.nextprot.org/caloha');
+-- DONE
+-- -- Caloha
+-- ld_dir('/staging/caloha/data', '*.ttl.gz', 'http://www.nextprot.org/caloha');
 
--- ChEBI
-ld_dir('/staging/chebi/data' , '*.owl.gz' , 'http://www.ebi.ac.uk/chebi' );
-
+-- DONE
+-- -- ChEBI
+-- ld_dir('/staging/chebi/data' , '*.owl.gz' , 'http://www.ebi.ac.uk/chebi' );
 
 -- -- ConceptWiki
 -- ld_dir('/staging/CW' , '*.nq.gz' , 'http://www.conceptwiki.org' );
