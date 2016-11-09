@@ -35,8 +35,8 @@
 -- and then the rest
 
 
--- -- FDA Adverse Events
--- ld_dir('/staging/aers/data' , '*.nt.gz', 'http://aers.data2semantics.org/');
+-- FDA Adverse Events
+ld_dir('/staging/aers/data' , '*.nt.gz', 'http://aers.data2semantics.org/');
 
 -- DONE
 -- -- Caloha
@@ -49,26 +49,26 @@
 -- -- ConceptWiki
 -- ld_dir('/staging/conceptwiki/data/' , '*.ttl.gz' , 'http://www.conceptwiki.org' );
 
--- DisGeneT
-ld_dir('/staging/disgenet/data', '*.ttl.gz', 'http://rdf.imim.es');
+-- -- DisGeneT
+-- ld_dir('/staging/disgenet/data', '*.ttl.gz', 'http://rdf.imim.es');
 
--- -- DrugBank v4.1
--- ld_dir('/staging/drugbank/data' , '*.nt.gz' , 'http://www.openphacts.org/bio2rdf/drugbank');
+-- DrugBank v4.1
+ld_dir('/staging/drugbank/data' , '*.nt.gz' , 'http://www.openphacts.org/bio2rdf/drugbank');
 
--- -- Enzyme
--- ld_dir('/staging/enzyme/data' , '*.rdf.gz' , 'http://purl.uniprot.org/enzyme' );
+-- Enzyme
+ld_dir('/staging/enzyme/data' , '*.rdf.gz' , 'http://purl.uniprot.org/enzyme' );
 
--- -- Gene Ontology
--- ld_dir('/staging/go/data' , '*.owl.gz' , 'http://www.geneontology.org' );
-
-
-
--- doid
-ld_dir('/staging/doid/data' , '*.owl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
+-- Gene Ontology
+ld_dir('/staging/go/data' , '*.owl.gz' , 'http://www.geneontology.org' );
 
 
--- VoID Dataset Descriptors
-ld_dir('/staging/void/data' , '*.ttl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
+
+-- -- doid
+-- ld_dir('/staging/doid/data' , '*.owl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
+
+
+-- -- VoID Dataset Descriptors
+-- ld_dir('/staging/void/data' , '*.ttl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
 
 
 
