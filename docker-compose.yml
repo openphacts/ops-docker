@@ -94,8 +94,6 @@ services:
     volumes_from:
      - virtuosodata
      - openphactsrdf
-    volumes:
-      - /media/tyree/ops/rdf/staging/:/staging/
 
   
   ### Download from data.openphacts.org
