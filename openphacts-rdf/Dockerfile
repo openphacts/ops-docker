@@ -21,7 +21,7 @@ COPY download.sh /usr/local/bin/
 # RUN /usr/local/bin/download.sh
 
 RUN mkdir -p /staging
-COPY staging.sql /staging/
+# COPY staging.sql /staging/
 COPY triple-count.rq /staging/
 
 RUN ["/usr/local/bin/download.sh"]
