@@ -1,4 +1,4 @@
-FROM mysql:5.6
+FROM mysql:5.7
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget axel cpipe
 
