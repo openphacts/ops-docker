@@ -7,7 +7,7 @@ sleep $MYSQL_SLEEP &
 sql=/tmp/staging.sql
 rm -f $sql
 # empty file to start with
-touch sql
+touch $sql
 
 cd /staging
 # Forget about any incomplete staging
