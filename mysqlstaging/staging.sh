@@ -49,6 +49,7 @@ echo "port=3306" >> /tmp/my.conf
 echo "database=ims" >> /tmp/my.conf
 echo "user=root" >> /tmp/my.conf
 echo "password=uCie0ahgah" >> /tmp/my.conf
+#echo "password=tiger" >> /tmp/my.conf
 
 echo "$ cat /tmp/my.conf"
 cat /tmp/my.conf
