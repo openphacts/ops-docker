@@ -56,6 +56,14 @@ echo "Waiting for mySQL (up to $MYSQL_SLEEP seconds)"
 wait
 echo "mySQL staging"
 ls -alh /tmp/staging.sql
+sql2=${sql}2
+
+## ToDo:
+## Somehow the line 'Enter password:' kept getting inserted into the 'cat' of the
+## $sql file. Do not where it was coming from.  Use 'grep -v' to delete it.
+#
+grep -v '^Enter password' $sql > $sql2
+
 
 cat $sql | cpipe -vw -b 8192 | mysql --defaults-file=/tmp/my.conf --protocol=TCP
 # Mark as staged
