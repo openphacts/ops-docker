@@ -10,6 +10,8 @@ RUN mkdir /staging
 RUN /usr/local/bin/download.sh && mv /download/*.sql.gz /staging/ims.sql.gz
 VOLUME /staging
 
+ENV OPS_LAST_REFRESH 2016.11.11 9pm
+
 COPY staging.sh /usr/local/bin/
 
 CMD ["/usr/local/bin/staging.sh"]
