@@ -64,8 +64,8 @@ sql2=${sql}2
 #
 grep -v '^Enter password' $sql > $sql2
 
+cat $sql2 | cpipe -vw -b 8192 |  mysql --defaults-file=/tmp/my.conf --protocol=tcp
 
-cat $sql | cpipe -vw -b 8192 | mysql --defaults-file=/tmp/my.conf --protocol=TCP
 # Mark as staged
 mv staging/* staged/
 rm -f $sql
