@@ -29,13 +29,15 @@ for file in *.sql.gz ; do
     echo 'UPDATE mappingSet SET justification="http://semanticscience.org/resource/SIO_000985" WHERe sourceDataSource="ConceptWiki" AND justification="http://example.com/ConceptWikiProtein";' >> $sql
     touch $staging
   fi
-done  
+done
+
 if ! [ -f $sql ] ; then
   echo "mySQL already staged"
   exit 0
 fi
 
 
+## ToDo: Extra debugging statements added. Clean up later.
 
 # To avoid password warnings..
 echo "[client]" > /tmp/my.conf
@@ -54,8 +56,15 @@ cat /tmp/my.conf
 # hope that mysql has started
 echo "Waiting for mySQL (up to $MYSQL_SLEEP seconds)"
 wait
-echo "mySQL staging"
-ls -alh /tmp/staging.sql
+echo "mySQL staging using file: $sql"
+ls -alh $sql
+
+wc $sql
+
+echo 'head -40 $sql : '
+
+head -40 $sql
+
 sql2=${sql}2
 
 ## ToDo:
@@ -63,6 +72,12 @@ sql2=${sql}2
 ## $sql file. Do not where it was coming from.  Use 'grep -v' to delete it.
 #
 grep -v '^Enter password' $sql > $sql2
+
+## Second 'wc' should report one less line now.
+
+wc $sql2
+
+head -20 $sql2
 
 cat $sql2 | cpipe -vw -b 8192 |  mysql --defaults-file=/tmp/my.conf --protocol=tcp
 
