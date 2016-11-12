@@ -103,7 +103,7 @@ services:
     volumes:
       - /download
       - /staging
-      # To specify alternative data folder, use insetad:
+      # To specify alternative data folder, use instead:
       # - /media/big-SSD/download:/download
       # - /media/big-SSD/staging:/staging
       # - /media/tyree/ops/rdf/download/:/download/
@@ -140,8 +140,7 @@ services:
       - MYSQL_DATABASE=ims
       - MYSQL_USER=ims
       - MYSQL_PASSWORD=ims
-      - MYSQL_ROOT_PASSWORD=tiger
-#      - MYSQL_ROOT_PASSWORD=uCie0ahgah
+      - MYSQL_ROOT_PASSWORD=uCie0ahgah
     #restart: always
 
   mysqldata:
