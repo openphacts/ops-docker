@@ -4,7 +4,9 @@ set -e
 MYSQL_SLEEP=30
 sleep $MYSQL_SLEEP &
 
-sql=/tmp/staging.sql
+## Copy staging.sql file to non-/tmp folder so can debug wreckage.
+#sql=/tmp/staging.sql
+sql=/staging/load.sql
 rm -f $sql
 # empty file to start with
 touch $sql
