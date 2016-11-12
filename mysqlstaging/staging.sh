@@ -40,7 +40,9 @@ fi
 # To avoid password warnings..
 echo "[client]" > /tmp/my.conf
 # echo "host=$MYSQL_PORT_3306_TCP_ADDR" >> /tmp/my.conf
-echo "host=127.0.0.1" >> /tmp/my.conf
+#echo "host=127.0.0.1" >> /tmp/my.conf
+## 'host' should be the name of the 'mysql' service. docker-compose will do the rest.
+echo "host=mysql" >> /tmp/my.conf
 echo "port=3306" >> /tmp/my.conf
 echo "database=ims" >> /tmp/my.conf
 echo "user=root" >> /tmp/my.conf
