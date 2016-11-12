@@ -1,7 +1,6 @@
 #!/bin/sh
 
 set -e
-set -x
 
 # wait for mysql at least 30 seconds
 MYSQL_SLEEP=6

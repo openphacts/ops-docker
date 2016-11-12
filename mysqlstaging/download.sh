@@ -10,8 +10,8 @@ NAME=mysql-for-ims-${OPS_VERSION}-${OPS_FILE_DATE}.sql.gz
 url=${BASE}${NAME}
 
 rm -f *.sha1
-#axel --alternate $url.sha1 
-wget $url.sha1 
+#axel --alternate $url.sha1
+wget $url.sha1
 
 if ! [ -f $NAME ] || ! sha1sum --status -c $NAME.sha1 2>/dev/null ; then
   #axel --alternate $url
