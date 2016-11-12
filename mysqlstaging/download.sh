@@ -1,7 +1,11 @@
 #!/bin/sh
 set -e
-BASE=https://data.openphacts.org/free/2.1/ims/
-NAME=mysql-for-ims-2.1-20160419.sql.gz
+
+OPS_VERSION="2.1"
+OPS_FILE_DATE="20160419"
+
+BASE=https://data.openphacts.org/free/${OPS_VERSION}/ims/
+NAME=mysql-for-ims-${OPS_VERSION}-${OPS_FILE_DATE}.sql.gz
 
 url=${BASE}${NAME}
 
