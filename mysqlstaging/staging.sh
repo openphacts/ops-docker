@@ -83,6 +83,7 @@ cat $sql2 | cpipe -vw -b 8192 |  mysql --defaults-file=/tmp/my.conf --protocol=t
 
 # Mark as staged
 mv staging/* staged/
-rm -f $sql
+rm -f $sql $sql2
+
 echo "mySQL staging finished"
 
