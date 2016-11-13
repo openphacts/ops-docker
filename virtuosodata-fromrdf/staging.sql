@@ -1,4 +1,3 @@
--- Biggest ones first
 
 -- ToDo (MISSING):
 --   surechembl
@@ -11,18 +10,19 @@ ld_dir('/staging/bao/data' , '*.gz' , 'http://www.bioassayontology.org' );
 
 -- NCATS
 
--- in: <http://rdf.ncats.nih.gov/opddr>
+-- in Graph: <http://rdf.ncats.nih.gov/opddr>
 ld_dir('/staging/ncats/data' , 'npcpd2_assay.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
 ld_dir('/staging/ncats/data' , 'npcpd2_bao.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
 ld_dir('/staging/ncats/data' , 'npcpd2_substance.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
 
--- in: <http://rdf.ncats.nih.gov/opddr/pubchem>
+-- in Graph: <http://rdf.ncats.nih.gov/opddr/pubchem>
 ld_dir('/staging/ncats/data' , 'pubchem_*.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr/pubchem' );
 
 
 -- surechembl
 ld_dir('/staging/surechembl/data' , '*.ttl.gz' , 'http://www.ebi.ac.uk/surechembl' );
 
+-- Biggest ones first
 
 -- -- Uniprot 
 -- ld_dir('/staging/uniprot/data' , '*.rdf.xml.gz' , 'http://purl.uniprot.org' );
@@ -39,7 +39,6 @@ ld_dir('/staging/surechembl/data' , '*.ttl.gz' , 'http://www.ebi.ac.uk/surechemb
 
 -- -- Open PHACTS Chemical Registry
 
--- DONE
 -- ld_dir('/staging/ocrs/data/CHEMBL' , '*.ttl.gz' , 'http://ops.rsc.org' );
 -- ld_dir('/staging/ocrs/data/CHEBI' , '*.ttl.gz' , 'http://ops.rsc.org' );
 -- ld_dir('/staging/ocrs/data/DRUGBANK' , '*.ttl.gz' , 'http://ops.rsc.org' );
@@ -53,11 +52,9 @@ ld_dir('/staging/surechembl/data' , '*.ttl.gz' , 'http://www.ebi.ac.uk/surechemb
 -- -- FDA Adverse Events
 -- ld_dir('/staging/aers/data' , '*.nt.gz', 'http://aers.data2semantics.org/');
 
--- DONE
 -- -- Caloha
 -- ld_dir('/staging/caloha/data', '*.ttl.gz', 'http://www.nextprot.org/caloha');
 
--- DONE
 -- -- ChEBI
 -- ld_dir('/staging/chebi/data' , '*.owl.gz' , 'http://www.ebi.ac.uk/chebi' );
 
