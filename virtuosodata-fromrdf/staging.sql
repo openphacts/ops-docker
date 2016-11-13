@@ -1,27 +1,4 @@
 
--- ToDo (MISSING):
---   surechembl
---   BAO
---   NCATS
-
--- BAO
-ld_dir('/staging/bao/data' , '*.gz' , 'http://www.bioassayontology.org' );
-
-
--- NCATS
-
--- in Graph: <http://rdf.ncats.nih.gov/opddr>
-ld_dir('/staging/ncats/data' , 'npcpd2_assay.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
-ld_dir('/staging/ncats/data' , 'npcpd2_bao.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
-ld_dir('/staging/ncats/data' , 'npcpd2_substance.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
-
--- in Graph: <http://rdf.ncats.nih.gov/opddr/pubchem>
-ld_dir('/staging/ncats/data' , 'pubchem_*.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr/pubchem' );
-
-
--- surechembl
-ld_dir('/staging/surechembl/data' , '*.ttl.gz' , 'http://www.ebi.ac.uk/surechembl' );
-
 -- Biggest ones first
 
 -- Uniprot
@@ -46,8 +23,22 @@ ld_dir('/staging/ocrs/data/PDB' , '*.ttl.gz' , 'http://ops.rsc.org' );
 ld_dir('/staging/ocrs/data/MESH' , '*.ttl.gz' , 'http://ops.rsc.org' );
 ld_dir('/staging/ocrs/data/HUMAN_METABOLOME_DATABASE' , '*.ttl.gz' , 'http://ops.rsc.org' );
 
+-- surechembl
+ld_dir('/staging/surechembl/data' , '*.ttl.gz' , 'http://www.ebi.ac.uk/surechembl' );
+
 
 -- and then the rest
+
+-- BAO
+ld_dir('/staging/bao/data' , '*.gz' , 'http://www.bioassayontology.org' );
+
+-- NCATS
+-- in Graph: <http://rdf.ncats.nih.gov/opddr>
+ld_dir('/staging/ncats/data' , 'npcpd2_assay.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
+ld_dir('/staging/ncats/data' , 'npcpd2_bao.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
+ld_dir('/staging/ncats/data' , 'npcpd2_substance.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr' );
+-- in Graph: <http://rdf.ncats.nih.gov/opddr/pubchem>
+ld_dir('/staging/ncats/data' , 'pubchem_*.ttl.gz' , 'http://rdf.ncats.nih.gov/opddr/pubchem' );
 
 -- FDA Adverse Events
 ld_dir('/staging/aers/data' , '*.nt.gz', 'http://aers.data2semantics.org/');
@@ -74,14 +65,12 @@ ld_dir('/staging/enzyme/data' , '*.rdf.gz' , 'http://purl.uniprot.org/enzyme' );
 ld_dir('/staging/go/data' , '*.owl.gz' , 'http://www.geneontology.org' );
 
 
-
 -- doid
 ld_dir('/staging/doid/data' , '*.owl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
 
 
 -- VoID Dataset Descriptors
 ld_dir('/staging/void/data' , '*.ttl.gz' , 'http://www.openphacts.org/api/datasetDescriptors' );
-
 
 
 -- WikiPathways
