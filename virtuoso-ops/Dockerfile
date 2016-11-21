@@ -11,4 +11,4 @@ RUN sed -i 's/\(MaxQueryExecutionTime.*=\).*/\1 900/' /etc/virtuoso-opensource-7
 
 ## FixMe: temp hack to get virtuoso to not reject '/sources' api call on AWS for 2.1
 
-RUN sed -i 's/\(MaxQueryCostEstimationTime.*=\).*/\1 40000/' /etc/virtuoso-opensource-7/virtuoso.ini
+RUN sed -i 's/\(MaxQueryCostEstimationTime.*=\).*/\1 4000000/' /etc/virtuoso-opensource-7/virtuoso.ini
