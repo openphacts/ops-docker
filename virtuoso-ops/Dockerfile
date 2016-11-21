@@ -8,3 +8,7 @@ RUN sed -i 's/\(MaxKeepAlives.*=\).*/\1 30/' /etc/virtuoso-opensource-7/virtuoso
 # sparql settings
 RUN sed -i 's/\(ResultSetMaxRows.*=\).*/\1 500000000/' /etc/virtuoso-opensource-7/virtuoso.ini
 RUN sed -i 's/\(MaxQueryExecutionTime.*=\).*/\1 900/' /etc/virtuoso-opensource-7/virtuoso.ini
+
+## FixMe: temp hack to get virtuoso to not reject '/sources' api call on AWS for 2.1
+
+RUN sed -i 's/\(MaxQueryCostEstimationTime.*=\).*/\1 40000/' /etc/virtuoso-opensource-7/virtuoso.ini
