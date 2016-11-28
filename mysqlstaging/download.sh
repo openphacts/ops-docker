@@ -1,13 +1,17 @@
 #!/bin/sh
 set -e
-BASE=https://data.openphacts.org/free/2.0/ims/
-NAME=mysql-for-ims-2.0-20151214.sql.gz
+
+OPS_VERSION="2.1"
+OPS_FILE_DATE="20160419"
+
+BASE=https://data.openphacts.org/free/${OPS_VERSION}/ims/
+NAME=mysql-for-ims-${OPS_VERSION}-${OPS_FILE_DATE}.sql.gz
 
 url=${BASE}${NAME}
 
 rm -f *.sha1
-#axel --alternate $url.sha1 
-wget $url.sha1 
+#axel --alternate $url.sha1
+wget $url.sha1
 
 if ! [ -f $NAME ] || ! sha1sum --status -c $NAME.sha1 2>/dev/null ; then
   #axel --alternate $url

@@ -4,10 +4,12 @@ set -e
 MYSQL_SLEEP=30
 sleep $MYSQL_SLEEP &
 
-sql=/tmp/staging.sql
+## Copy staging.sql file to non-/tmp folder so can debug wreckage.
+#sql=/tmp/staging.sql
+sql=/staging/load.sql
 rm -f $sql
 # empty file to start with
-touch sql
+touch $sql
 
 cd /staging
 # Forget about any incomplete staging
@@ -27,29 +29,62 @@ for file in *.sql.gz ; do
     echo 'UPDATE mappingSet SET justification="http://semanticscience.org/resource/SIO_000985" WHERe sourceDataSource="ConceptWiki" AND justification="http://example.com/ConceptWikiProtein";' >> $sql
     touch $staging
   fi
-done  
+done
+
 if ! [ -f $sql ] ; then
   echo "mySQL already staged"
   exit 0
 fi
 
 
+## ToDo: Extra debugging statements added. Clean up later.
 
 # To avoid password warnings..
 echo "[client]" > /tmp/my.conf
-echo "host=$MYSQL_PORT_3306_TCP_ADDR" >> /tmp/my.conf
-echo "port=$MYSQL_PORT_3306_TCP_PORT" >> /tmp/my.conf
+# echo "host=$MYSQL_PORT_3306_TCP_ADDR" >> /tmp/my.conf
+#echo "host=127.0.0.1" >> /tmp/my.conf
+## 'host' should be the name of the 'mysql' service. docker-compose will do the rest.
+echo "host=mysql" >> /tmp/my.conf
+echo "port=3306" >> /tmp/my.conf
+echo "database=ims" >> /tmp/my.conf
 echo "user=root" >> /tmp/my.conf
-echo "password=$MYSQL_ENV_MYSQL_ROOT_PASSWORD" >> /tmp/my.conf
+echo "password=uCie0ahgah" >> /tmp/my.conf
+#echo "password=tiger" >> /tmp/my.conf
+
+echo "$ cat /tmp/my.conf"
+cat /tmp/my.conf
 
 # hope that mysql has started
 echo "Waiting for mySQL (up to $MYSQL_SLEEP seconds)"
 wait
-echo "mySQL staging"
-ls -alh /tmp/staging.sql
+echo "mySQL staging using file: $sql"
+ls -alh $sql
 
-cat $sql | cpipe -vw -b 8192 | mysql --defaults-file=/tmp/my.conf
+wc $sql
+
+echo 'head -40 $sql : '
+
+head -40 $sql
+
+sql2=${sql}2
+
+## ToDo:
+## Somehow the line 'Enter password:' kept getting inserted into the 'cat' of the
+## $sql file. Do not where it was coming from.  Use 'grep -v' to delete it.
+#
+grep -v '^Enter password' $sql > $sql2
+
+## Second 'wc' should report one less line now.
+
+wc $sql2
+
+head -20 $sql2
+
+cat $sql2 | cpipe -vw -b 8192 |  mysql --defaults-file=/tmp/my.conf --protocol=tcp
+
 # Mark as staged
 mv staging/* staged/
-rm -f $sql
+rm -f $sql $sql2
+
 echo "mySQL staging finished"
+
