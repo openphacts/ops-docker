@@ -13,6 +13,7 @@ ld_dir('/staging/chembl/data', '*.ttl.gz', 'http://www.ebi.ac.uk/chembl');
 
 -- Nextprot
 ld_dir('/staging/nextprot/data', '*.nq.gz', 'http://www.nextprot.org');
+ld_dir('/staging/nextprot/data', '*.ttl.gz', 'http://www.nextprot.org');
 
 -- Open PHACTS Chemical Registry
 
