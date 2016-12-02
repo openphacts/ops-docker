@@ -1,4 +1,4 @@
-# Open PHACTS platform
+# Open PHACTS platform, v2.1
 # Docker Compose configuration
 # https://docs.docker.com/compose/yml/
 #
@@ -33,7 +33,8 @@ services:
     links:
       - api
     environment:
-      # Use full URL for external service, use service name if calling another local web service.
+      # Use full URL for calling external service.
+      # Use service name if calling another web service defined in this file.
       # Do NOT include a trailing /
       - API_URL=http://api:80
       - CRS=https://ops2.rsc.org/ops
@@ -44,7 +45,6 @@ services:
     container_name: ops-api
     image: openphacts/ops-linkeddataapi
     ports:
-      # Remember to match port in API_URL below
       - "3002:80"
     links:
       - ims
