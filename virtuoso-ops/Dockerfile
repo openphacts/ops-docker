@@ -19,3 +19,7 @@ RUN sed -i 's/\(MaxQueryCostEstimationTime.*=\).*/\1 4000000/' /etc/virtuoso-ope
 ##  - http://wikis.openlinksw.com/VirtuosoWikiWeb/VirtuosoErrorImageSizeWentAboveLimit
 ## [Parameters]
 RUN sed -i 's/;X509ClientVerifyCAFile.*/TransactionAfterImageLimit       = 1000111000/' /etc/virtuoso-opensource-7/virtuoso.ini
+
+RUN rm -f /var/lib/virtuoso-opensource-7/db/virtuoso.lck
+
+# COPY insert /staging/insert
