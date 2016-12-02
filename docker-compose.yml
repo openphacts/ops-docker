@@ -43,7 +43,8 @@ services:
 
   api:
     container_name: ops-api
-    image: openphacts/ops-linkeddataapi
+    build: openphacts/linkeddataapi
+#    image: openphacts/ops-linkeddataapi
     ports:
       - "3002:80"
     links:
@@ -135,6 +136,7 @@ services:
       - MYSQL_USER=ims
       - MYSQL_PASSWORD=ims
       - MYSQL_ROOT_PASSWORD=uCie0ahgah
+#      - MYSQL_ROOT_PASSWORD=tiger
 
   mysql:
     container_name: ops-mysql
