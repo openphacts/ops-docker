@@ -33,9 +33,8 @@ services:
     links:
       - api
     environment:
-      # CHANGE: "localhost" to fully qualified hostname
+      # Use full URL for external service, use service name if calling another local web service.
       # Do NOT include a trailing /
-#       - API_URL=http://livingstone.data2discovery.net:3002
       - API_URL=http://api:80
       - CRS=https://ops2.rsc.org/ops
       - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
@@ -81,20 +80,21 @@ services:
       # - /media/big-SSD/virtuoso:/virtuoso
       - /virtuoso
 
-  # Populate RDF from virtuoso backup download
+  ## Uncomment either the 'virtuosostaging' service to load data from a Virtuoso backup,
+  ## or uncomment 'virtuosostagingrdf' and 'openphactsrdf' to load data from RDF files.
+  ## Then run one of the following to get triples into Virtuoso:
+  # docker-compose up -d virtuosostaging
+  # docker-compose up -d virtuosostagingrdf
+
+  ### Populate RDF from virtuoso backup download
   # virtuosostaging:
   #   container_name: ops-virtuosostaging
   #   build: virtuosodata-frombackup
   #   volumes_from:
   #     - virtuosodata
   #
-  # To customize RDF dataloading, comment OUT the above 'virtuosostaging' block,
-  # uncomment the below block, and then run
-  # docker-compose up -d virtuosostagingrdf
-  #
-  ## BEGIN custom loading
 
-  ### Load into virtuoso
+  ### Load RDF files into Virtuoso
   virtuosostagingrdf:
     container_name: ops-virtuosostagingrdf
     build: virtuosodata-fromrdf
@@ -112,7 +112,6 @@ services:
       # To specify alternative data folder, use instead:
       # - /media/big-SSD/download:/download
       # - /media/big-SSD/staging:/staging
-      # - /media/tyree/ops/rdf/download/:/download/
 
 
   ims:
@@ -136,7 +135,6 @@ services:
       - MYSQL_USER=ims
       - MYSQL_PASSWORD=ims
       - MYSQL_ROOT_PASSWORD=uCie0ahgah
-#      - MYSQL_ROOT_PASSWORD=tiger
 
   mysql:
     container_name: ops-mysql
@@ -149,7 +147,6 @@ services:
       - MYSQL_USER=ims
       - MYSQL_PASSWORD=ims
       - MYSQL_ROOT_PASSWORD=uCie0ahgah
-#      - MYSQL_ROOT_PASSWORD=tiger
     #restart: always
 
   mysqldata:
@@ -161,38 +158,18 @@ services:
        # - /media/big-SSD/mysql:/var/lib/mysql
       - /var/lib/mysql
 
-#  mysqltest:
-#    container_name: ops-mysqltest
-##    build: mysqltest
-#    image: mysql:5.7
-#    links:
-#      - mysql
-#    environment:
-#      - MYSQL_HOST=mysql
-#      - MYSQL_DATABASE=ims
-#      - MYSQL_USER=ims
-#      - MYSQL_PASSWORD=ims
-#      - MYSQL_ROOT_PASSWORD=tiger
-#
-#  mysqltestdata:
-#     container_name: ops-mysqltestdata
-#     image: ubuntu
-#     volumes:
-#       - /var/lib/data
-
   ### END custom loading
 
+
+  # For Open PHACTS version 2.1: includes Sure ChEMBL and additional Wikipathways data.
 
   ## Future services
 
   #elasticsearch:
   #  container_name: ops-elasticsearch
   #  image: elasticsearch
-  ##  TODO: Data loading
   #ops-search:
   # container_name: ops-search
   # image: openphacts/ops-search
-
-  ## Future data
-
-  # For Open PHACTS version 2.1: include Sure ChEMBL and additional Wikipathways data.
+  #ops.js
+  #crs
