@@ -1,6 +1,10 @@
 FROM php:5.6-apache
 MAINTAINER Stian Soiland-Reyes <soiland-reyes@cs.manchester.ac.uk>
 
+## This Dockerfile is a fork of the Dockerfile for docker-hub image 'openphacts/ops-linkeddataapi'.
+## see: https://hub.docker.com/r/openphacts/ops-linkeddataapi/~/dockerfile/
+##  or: https://github.com/openphacts/OPS_LinkedDataApi/blob/docker/Dockerfile
+
 # Install apache/PHP for REST API
 WORKDIR /usr/src
 RUN tar xJfv php.tar.xz
