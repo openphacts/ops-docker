@@ -3,3 +3,7 @@
 
 .idea/
 *.iml
+
+## ignore top-level 'logs' directory
+
+/logs/
