@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+## Most statements here are debugging, to check that files in the Docker containers are where expected.
+## Purpose is to move/copy file 'staging.sql' into '/staging' where the 'staging.sh' script already in
+## the stain/virtuoso image will load the 'staging.sql' file.
+## Ended up with 2-step process: in Dockerfile, COPY staging.sql to '/'. Then here, copy it to
+## '/staging/'. Why? It worked. Direct method must have initially failed.
+
+## ToDo: clean up, perhaps refactor how 'staging.sh' and 'staging.sql' work.
+
 # if [ -f /staging/.staged ] ; then
 #   echo "RDF is already loaded. To start again, try:"
 #   echo "    docker-compose run virtuosostaging rm /staging/.staged"
