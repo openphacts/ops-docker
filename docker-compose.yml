@@ -37,8 +37,6 @@ services:
       # Use service name if calling another web service defined in this file.
       # Do NOT include a trailing /
       - API_URL=http://api:80
-      - CRS=https://ops2.rsc.org/ops
-      - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
     #restart: always
 
   api:
