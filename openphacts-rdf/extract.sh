@@ -2,8 +2,10 @@
 set -e
 
 echo "Extracting to /staging"
+
 mkdir -p /staging
 cd /staging
+
 for x in /download/*tar ; do
   echo Extracting from $x
   tar xfv $x
