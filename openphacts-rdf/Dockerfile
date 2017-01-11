@@ -4,11 +4,13 @@ ENV OPS_VERSION 2.1
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget aria2
 
-## Where to download from
-##
-## free
+## ENV vars are for downloading RDF data from Artifactory repository in https://data.openphacts.org.
+## The data is divided between 'free' and 'nonfree' data.  The nonfree requires a password.
+## Downloading is done in the script "download.sh".
+#
+## free data
 ENV URL_DATA_FREE https://data.openphacts.org/free/${OPS_VERSION}/rdf/
-## non-free
+## non-free data
 ENV URL_DATA_NONFREE https://data.openphacts.org/non-free/${OPS_VERSION}/rdf/
 ENV USER_NONFREE randy
 ENV PASSWORD_NONFREE AP9fXcg93HTXrZGWNfP5A2HWGNz

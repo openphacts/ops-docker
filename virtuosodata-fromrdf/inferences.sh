@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## Datasets with a "insert_queries.sparql" file.
+
 declare -a datasets=(
     "enzyme"
     "chembl"
@@ -8,6 +10,9 @@ declare -a datasets=(
     "disgenet"
     "chebi"
 )
+
+## A function that given a file containing a SPARQL query uses Virtuoso's 'isql' command to execute
+## the query in the file. For a SPARQL query to execute properly 
 
 function run_insert_query() {
     local insert_query_file="$1"
