@@ -16,17 +16,19 @@ ENV USER_NONFREE randy
 ENV PASSWORD_NONFREE AP9fXcg93HTXrZGWNfP5A2HWGNz
 
 RUN mkdir -p /download
-WORKDIR /download
-COPY download.sh /usr/local/bin/
-
-# RUN chmod 755 /usr/local/bin/download.sh
-# RUN /usr/local/bin/download.sh
-
 RUN mkdir -p /staging
-# COPY staging.sql /staging/
+
+COPY download.sh /usr/local/bin/
+COPY extract.sh /usr/local/bin/
 COPY triple-count.rq /staging/
 
+RUN chmod 755 /usr/local/bin/download.sh
+RUN chmod 755 /usr/local/bin/extract.sh
+
+# COPY staging.sql /staging/
+
 RUN ["/usr/local/bin/download.sh"]
+RUN ["/usr/local/bin/extract.sh"]
 
 VOLUME /download/
 VOLUME /staging/
