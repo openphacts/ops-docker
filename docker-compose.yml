@@ -110,10 +110,13 @@ services:
   
   mysqlstaging:
     container_name: ops-mysqlstaging
-    #build: mysqlstaging
-    image: openphacts/identitymappingservice-staging
+    build: mysqlstaging
+    #image: openphacts/identitymappingservice-staging
     links:
       - mysql
+    environment:
+      - MYSQL_HOST=ops-mysql
+      - MYSQL_ROOT_PASSWORD=uCie0ahgah
   #
   # Populate RDF from virtuoso backup download
   virtuosostaging:

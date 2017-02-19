@@ -37,10 +37,9 @@ fi
 
 # To avoid password warnings..
 echo "[client]" > /tmp/my.conf
-echo "host=$MYSQL_PORT_3306_TCP_ADDR" >> /tmp/my.conf
-echo "port=$MYSQL_PORT_3306_TCP_PORT" >> /tmp/my.conf
+echo "host=$MYSQL_HOST" >> /tmp/my.conf
 echo "user=root" >> /tmp/my.conf
-echo "password=$MYSQL_ENV_MYSQL_ROOT_PASSWORD" >> /tmp/my.conf
+echo "password=$MYSQL_ROOT_PASSWORD" >> /tmp/my.conf
 
 # hope that mysql has started
 echo "Waiting for mySQL (up to $MYSQL_SLEEP seconds)"
