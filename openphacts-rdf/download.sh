@@ -99,7 +99,7 @@ function update_sha_file() {
         local datafile=${dataset}.tar
         local checksum=`cat ${shafile}`
         # Rewrite in sha1sum-format
-        echo "${datafile}  ${checksum}" > ${shafile}
+        echo "${checksum}  ${datafile}" > ${shafile}
 #        cat ${shafile}
     fi
 }
