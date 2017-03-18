@@ -20,7 +20,6 @@ RUN mkdir -p /staging
 
 COPY download.sh /usr/local/bin/
 COPY extract.sh /usr/local/bin/
-COPY triple-count.rq /staging/
 
 RUN chmod 755 /usr/local/bin/download.sh
 RUN chmod 755 /usr/local/bin/extract.sh

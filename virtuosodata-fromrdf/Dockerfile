@@ -8,6 +8,7 @@ COPY staging.sql /
 RUN ["/usr/local/bin/load.sh"]
 
 COPY inferences.sh /usr/local/bin/
+COPY triple-count.rq /staging/
 
 RUN ["/usr/local/bin/inferences.sh"]
 
