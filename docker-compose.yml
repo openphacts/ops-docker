@@ -135,6 +135,9 @@ services:
       - MYSQL_PASSWORD=ims
       - MYSQL_ROOT_PASSWORD=uCie0ahgah
 #      - MYSQL_ROOT_PASSWORD=tiger
+    ports:
+      # port 3006 only needed for debugging
+      - "3007:3306"
 
   mysql:
     container_name: ops-mysql
@@ -147,6 +150,9 @@ services:
       - MYSQL_USER=ims
       - MYSQL_PASSWORD=ims
       - MYSQL_ROOT_PASSWORD=uCie0ahgah
+    ports:
+      # port 3006 only needed for debugging
+      - "3006:3306"
     #restart: always
 
   mysqldata:
