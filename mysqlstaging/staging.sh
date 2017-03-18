@@ -80,7 +80,11 @@ wc $sql2
 
 head -20 $sql2
 
+echo "before loading mysql..."
+
 cat $sql2 | cpipe -vw -b 8192 |  mysql --defaults-file=/tmp/my.conf --protocol=tcp
+
+echo "...after loading mysql."
 
 # Mark as staged
 mv staging/* staged/
