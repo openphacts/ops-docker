@@ -106,10 +106,10 @@ services:
     container_name: ops-openphactsrdf
     build: openphacts-rdf
     volumes:
-#      - /download
-#      - /staging
-      - /media/tyree/ops/opsrdfdata/download:/download
-      - /media/tyree/ops/opsrdfdata/staging:/staging
+      - /download
+      - /staging
+#      - /media/tyree/ops/opsrdfdata/download:/download
+#      - /media/tyree/ops/opsrdfdata/staging:/staging
       # To specify alternative data folder, use instead:
       # - /media/big-SSD/download:/download
       # - /media/big-SSD/staging:/staging
