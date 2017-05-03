@@ -108,13 +108,19 @@ function get_sha() {
     local dataset="$1"
 
     local shafile=${dataset}.tar.sha1
-    local readmefile=${dataset}-README.txt
-    local baseurl=$(get_baseurl $dataset)
 
     if ! [ -f ${shafile} ]; then
         local baseurl=$(get_baseurl ${dataset})
-        wget -e robots=off --no-verbose --no-directories --no-parent $baseurl${shafile}
-        wget -e robots=off --no-verbose --no-directories --no-parent $baseurl${readmefile}
+        local sha_url="${baseurl}${dataset}.tar.sha1"
+        local readme_url="${baseurl}${dataset}-README.txt"
+
+        wget -e robots=off --no-verbose --no-directories --no-parent \
+            --user="${USER_NONFREE}" --password="${PASSWORD_NONFREE}" \
+            "${sha_url}"
+        wget -e robots=off --no-verbose --no-directories --no-parent \
+            --user="${USER_NONFREE}" --password="${PASSWORD_NONFREE}" \
+            "${readme_url}"
+
         update_sha_file ${dataset}
     fi
 }
@@ -140,6 +146,7 @@ rm -f /tmp/urls
 
 for dataset in "${nonfree_datasets[@]}"
 do
+    get_sha ${dataset}
     add_to_download_list ${dataset}
 done
 
