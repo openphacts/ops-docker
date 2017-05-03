@@ -127,7 +127,7 @@ services:
       - mysql
     volumes:
       - /home/ubuntu/d/era/a/staging/links:/links
-    command: [loader, file:///links/load-in-docker.xml]
+    command: "loader file:///links/load-in-docker.xml"
     #restart: always
 
   mysqlstaging:
