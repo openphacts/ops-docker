@@ -49,7 +49,7 @@ services:
     links:
       - ims
       - memcached
-      - virtuoso:sparql
+#      - virtuoso:sparql
     environment:
       - CRS=https://ops2.rsc.org/ops
       - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
