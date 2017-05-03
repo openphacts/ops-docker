@@ -20,6 +20,13 @@ RUN sed -i 's/\(MaxQueryCostEstimationTime.*=\).*/\1 4000000/' /etc/virtuoso-ope
 ## [Parameters]
 RUN sed -i 's/;X509ClientVerifyCAFile.*/TransactionAfterImageLimit       = 1000111000/' /etc/virtuoso-opensource-7/virtuoso.ini
 
+## Add prop 'MaxSortedTopRows = 40000' to the [Parameters] section.
+## Old limit was max of 10000 rows returned.
+## Fixed Issue: https://github.com/openphacts/GLOBAL/issues/381
+
+RUN sed -i '/^AsyncQueueMaxThreads/a\
+MaxSortedTopRows = 40000'
+
 RUN rm -f /var/lib/virtuoso-opensource-7/db/virtuoso.lck
 
 # COPY insert /staging/insert
