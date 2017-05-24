@@ -124,7 +124,7 @@ services:
   ims:
     container_name: ops-ims
 #    image: openphacts/identitymappingservice
-    build: ims
+    build: imsserver
     ports:
       - "3004:8080"
     links:
