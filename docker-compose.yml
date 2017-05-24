@@ -120,14 +120,15 @@ services:
 
   ims:
     container_name: ops-ims
-    image: openphacts/identitymappingservice
+#    image: openphacts/identitymappingservice
+    build: ims
     ports:
       - "3004:8080"
     links:
       - mysql
     volumes:
-      - /home/ubuntu/d/era/a/staging/links:/links
-    command: "loader file:///links/load-in-docker.xml"
+      - /home/ubuntu/d/era/b/staging/links:/links
+#    command: "loader file:///links/load-in-docker.xml"
     #restart: always
 
   mysqlstaging:
