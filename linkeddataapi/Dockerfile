@@ -12,4 +12,5 @@ WORKDIR /var/www/html
 RUN sed -i "s|'IMS_MAP_ENDPOINT'.*|'IMS_MAP_ENDPOINT', 'http://ims:8080/QueryExpander/mapUriRDF');|" deployment.settings.php
 
 # SPARQL server
-RUN sed -i "s,<http://[^>]*/sparql/>,<http://localhost:8890/sparql/>,g" api-config-files/*ttl
+#RUN sed -i "s,<http://[^>]*/sparql/>,<http://localhost:8890/sparql/>,g" api-config-files/*ttl
+RUN sed -i "s,<http://[^>]*/sparql/>,<http://alpha.openphacts.org:8890/sparql/>,g" api-config-files/*ttl
