@@ -7,3 +7,4 @@
 ## ignore top-level 'logs' directory
 
 /logs/
+imsserver/generated
