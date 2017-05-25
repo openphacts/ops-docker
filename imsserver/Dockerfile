@@ -29,8 +29,8 @@ ENV IMS_VERSION="2.0.5-SNAPSHOT"
 RUN rm -rf webapps
 RUN mkdir -p webapps
 
-COPY query.expander.ws.server-${QE_VERSION}.war webapps/QueryExpander.war
-COPY loader-${IMS_VERSION}-onejar.jar           /usr/local/lib/ims-loader.jar
+COPY generated/query.expander.ws.server-${QE_VERSION}.war  webapps/QueryExpander.war
+COPY generated/loader-${IMS_VERSION}-onejar.jar            /usr/local/lib/ims-loader.jar
 
 # permissions
 

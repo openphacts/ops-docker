@@ -9,5 +9,7 @@ SERVER_WAR=${HOME}/.m2/repository/uk/ac/manchester/cs/openphacts/queryexpander/q
 
 LOADER_JAR=${HOME}/.m2/repository/uk/ac/manchester/cs/openphacts/ims/loader/${IMS_VERSION}/loader-${IMS_VERSION}-onejar.jar
 
-cp ${SERVER_WAR} .
-cp ${LOADER_JAR} .
+mkdir -p ./generated
+
+cp ${SERVER_WAR} ./generated/
+cp ${LOADER_JAR} ./generated/
