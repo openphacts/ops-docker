@@ -27,7 +27,8 @@ services:
 
   explorer:
     container_name: ops-explorer
-    image: openphacts/explorer2
+#    image: openphacts/explorer2
+    image: explorer-in-ops-docker
     ports:
       - "3001:3000"
     links:
@@ -37,6 +38,7 @@ services:
       # Use service name if calling another web service defined in this file.
       # Do NOT include a trailing /
       - API_URL=http://api:80
+      - RAILS_ENV=development
 #      - API_URL=https://beta.openphacts.org/2.1
     #restart: always
 
