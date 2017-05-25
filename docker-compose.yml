@@ -57,7 +57,7 @@ services:
       # new 2.1: http://ops2.scidatasoft.com/api/
       # for 2.2: http://openphacts.scidatasoft.com/api/
 #      - CRS=https://chemistry.openphacts.org/api
-      - CRS=https://openphacts.scidatasoft.com/api
+      - CRS=https://openphacts.scidatasoft.com/api/JSON.ashx
       - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
     #restart: always
 
