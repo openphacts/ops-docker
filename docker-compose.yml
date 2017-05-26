@@ -37,7 +37,7 @@ services:
       # Use full URL for calling external service.
       # Use service name if calling another web service defined in this file.
       # Do NOT include a trailing /
-      - API_URL=http://api:80
+      - API_URL=http://alpha.openphacts.org:3002
       - RAILS_ENV=production
 #      - API_URL=https://beta.openphacts.org/2.1
     #restart: always
