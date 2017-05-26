@@ -14,3 +14,7 @@ RUN sed -i "s|'IMS_MAP_ENDPOINT'.*|'IMS_MAP_ENDPOINT', 'http://ims:8080/QueryExp
 # SPARQL server
 #RUN sed -i "s,<http://[^>]*/sparql/>,<http://localhost:8890/sparql/>,g" api-config-files/*ttl
 RUN sed -i "s,<http://[^>]*/sparql/>,<http://alpha.openphacts.org:8890/sparql/>,g" api-config-files/*ttl
+
+## Turn off memcache caching of API calls (for development and testing)
+
+RUN sed -i "s/CACHE_OFF.*/CACHE_OFF', 1);/" deployment.settings.php
