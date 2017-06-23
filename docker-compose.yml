@@ -44,8 +44,9 @@ services:
 
   api:
     container_name: ops-api
-    build: linkeddataapi
+#    build: linkeddataapi
 #    image: openphacts/ops-linkeddataapi
+    image: linkeddataapi-alpha
     ports:
       - "3002:80"
     links:
