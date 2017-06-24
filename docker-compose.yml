@@ -59,7 +59,12 @@ services:
       # for 2.2: http://openphacts.scidatasoft.com/api/
       - CRS=https://chemistry.openphacts.org/api/JSON.ashx
 #      - CRS=https://openphacts.scidatasoft.com/api/JSON.ashx
+#     CONCEPTWIKI should probably be removed
       - CONCEPTWIKI=http://www.conceptwiki.org/web-ws/concept
+#      IRS_ENDPOINT not used yet
+      - IRS_ENDPOINT=http://alpha.openphacts.org:8839
+      - IMS_ENDPOINT=http://alpha.openphacts.org:3004
+      - OPS_SPARQL_ENDPOINT=http://alpha.openphacts.org:8890/sparql
     #restart: always
 
   memcached:
