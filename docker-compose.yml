@@ -65,6 +65,7 @@ services:
       - IRS_ENDPOINT=http://alpha.openphacts.org:8839
       - IMS_ENDPOINT=http://alpha.openphacts.org:3004
       - OPS_SPARQL_ENDPOINT=http://alpha.openphacts.org:8890/sparql
+      - OPS_SEARCH_ENDPOINT=ops-search2:8839
     #restart: always
 
   memcached:
