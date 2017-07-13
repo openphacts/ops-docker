@@ -28,5 +28,5 @@ do
 done
 
 ## Need to run 'rdf_loader_run();' ??
-
-isql 1111 dba dba exec="rdf_loader_run();"
+#isql 1111 dba dba exec="rdf_loader_run();"
+# No (--Stian)
